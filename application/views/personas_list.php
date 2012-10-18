@@ -28,40 +28,68 @@
         <script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.dataTables.js"></script>
 
+        <script type="text/javascript">     
+            $(document).ready(function() {
+                oTable = $('#tabla').dataTable({
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers"
+                });
+            } );
+        </script>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">
+                <thead>
+                <tr>
+                    <th>Nombre</th> 
+                    <th>Departamento</th>
+                    <th>Municipio</th>
+                    <th>Vereda</th>
+                    <th>Direccion</th>
+                    <th>Fecha creacion</th>
+                    <th></th>
+                    <th></th>
+                </tr>
 
-
-<?php
-echo anchor(base_url().'index.php/personas/add/','Add');
-if(!$results){
-	echo '<h1>No Data</h1>';
-	exit;
-}
-	$header = array_keys($results[0]);
-
-for($i=0;$i<count($results);$i++){
-            $id = array_values($results[$i]);
-            $results[$i]['Edit']     = anchor(base_url().'index.php/personas/edit/'.$id[0],'Edit');
-            $results[$i]['Delete']   = anchor(base_url().'index.php/personas/delete/'.$id[0],'Delete',array('onClick'=>'return deletechecked(\' '.base_url().'index.php/personas/delete/'.$id[0].' \')'));                                          
-			array_shift($results[$i]);                        
-        }
-        
-$clean_header = clean_header($header);
-array_shift($clean_header);
-$this->table->set_heading($clean_header); 
-
-// view
-echo $this->table->generate($results); 
-echo $this->pagination->create_links();
-?>
-<script type="text/javascript">
-function deletechecked(link)
-{
-    var answer = confirm('Delete item?')
-    if (answer){
-        window.location = link;
-    }
-    
-    return false;  
-}
-
-</script>
+                </thead>
+                <tbody>
+                    <?php
+                        $lats = "";         // string with latitude values
+                        $lngs = "";         // string with longitude values // string with address values
+                        $names = "";
+                        $i=0;
+                    ?>
+            
+                    <?php foreach($query->result()as $fila): ?>
+                        <tr class="odd gradeX"> 
+                            <td><a onmouseover="highlightMarker(<?php echo $i;?>)"><?php echo $fila->Nombre;?></a></td>
+                            <td><?php echo $fila->Departamento;?></td>
+                            <td><?php echo $fila->Muncipio;?></td>
+                            <td><?php echo $fila->Vereda;?></td>    
+                            <td><?php echo $fila->Direccion;?></td>
+                            <?php 
+                            $lats .= $fila->Latitud.";;";
+                            $lngs .= $fila->longitud.";;";
+                            $names .= $fila->Nombre.";;";
+                            
+                            ?>
+                            
+                            <td><?php echo $fila->Fecha;?></td>
+                            <td><a class="btn btn-success" href="<?php echo base_url().'index.php/banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
+                            <td><?php echo anchor(base_url().'index.php/banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger','onClick'=>'return deletechecked(\' '.base_url().'index.php/banco/delete/'.$fila->Id.' \')'));?></td> 
+                        </tr>
+                        
+                    <?php $i++; endforeach;?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+</table>
+<br>

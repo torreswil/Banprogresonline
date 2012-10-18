@@ -8,6 +8,7 @@ class Personas extends CI_Controller {
 		$this->load->helper(array('form','url','codegen_helper'));
 		$this->load->model('codegen_model','',TRUE);
 		$this->load->model('ubigeo');
+		$this->load->model('cliente');
 	}	
 	
 	function index(){
@@ -62,26 +63,42 @@ class Personas extends CI_Controller {
 					'fecha_nacimiento' => set_value('fecha_nacimiento'),
 					'fecha_registro' => set_value('fecha_registro')
             );
-           
-			if ($this->codegen_model->add('personas',$data_persona) == TRUE)
-			{
-				$data_cliente=array(
-					'banco' => $this->input->post('banco'),
-					'persona' => set_value('id'),
-					'ocupacion' => $this->input->post('ocupacion')
-					);
-				$this->codegen_model->add('clientes',$data_cliente);
-				//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
-				// or redirect
-				redirect(base_url().'index.php/personas/manage/');
+           if($this->codegen_model->edit('personas',$data_persona,'id',$data_persona['id'])==FALSE){
+
+
+				if ($this->codegen_model->add('personas',$data_persona) == TRUE)
+				{
+					$data_cliente=array(
+						'banco' => $this->input->post('banco'),
+						'persona' => set_value('id'),
+						'ocupacion' => $this->input->post('ocupacion')
+						);
+					$this->codegen_model->add('clientes',$data_cliente);
+					//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
+					// or redirect
+					redirect(base_url().'index.php/personas/manage/');
+				}
+				else
+				{
+					$this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
+
+				}
 			}
 			else
 			{
-				$this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
-
+				$data_cliente=array(
+						'banco' => $this->input->post('banco'),
+						'persona' => set_value('id'),
+						'ocupacion' => $this->input->post('ocupacion')
+						);
+					$this->codegen_model->add('clientes',$data_cliente);
+					//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
+					// or redirect
+					redirect(base_url().'index.php/banco/ver/'.$this->input->post('banco'));
 			}
-		}	
-		$this->data['dptos']=$this->ubigeo->devolver_departamentos();	   
+		}
+		$this->data['dptos']=$this->ubigeo->devolver_departamentos();	
+		$this->data['banco']=$this->uri->segment(3);   
 		$this->load->view('personas_add', $this->data);   
         //$this->template->load('content', 'personas_add', $this->data);
     }	
@@ -115,10 +132,18 @@ class Personas extends CI_Controller {
 					'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
 					'fecha_registro' => $this->input->post('fecha_registro')
             );
+
+			$cliente = array(
+				'banco' =>$this->input->post('banco'),
+				'ocupacion' => $this->input->post('ocupacion'),
+				'persona' => $this->input->post('id'),
+
+				);
            
 			if ($this->codegen_model->edit('personas',$data,'id',$this->input->post('id')) == TRUE)
 			{
-				redirect(base_url().'index.php/personas/manage/');
+				$this->cliente->edit($this->input->post('banco'),$this->input->post('id'),$cliente);
+				redirect(base_url().'index.php/banco/ver/'.$this->input->post('banco'));
 			}
 			else
 			{
@@ -128,15 +153,37 @@ class Personas extends CI_Controller {
 		}
 
 		$this->data['result'] = $this->codegen_model->get('personas','id,id,tipo_id,nombre1,nombre2,apellido1,apellido2,celular,fijo,email,direccion,departamento_residencia,municipio_residencia,localidad,departamento_nacimiento,municipio_nacimiento,fecha_nacimiento,fecha_registro','id = '.$this->uri->segment(3),NULL,NULL,true);
-		
+		$arreglo  = array(
+				'banco' => $this->uri->segment(4) ,
+				'persona' => $this->uri->segment(3) ,
+		 );
+		$this->data['cliente']=$this->codegen_model->get('clientes','ocupacion',$arreglo,NULL,NULL,true);
+		$this->data['banco'] = $this->uri->segment(4);
+		$this->data['dptos']=$this->ubigeo->devolver_departamentos();
 		$this->load->view('personas_edit', $this->data);		
         //$this->template->load('content', 'personas_edit', $this->data);
     }
 	
     function delete(){
-            $ID =  $this->uri->segment(3);
-            $this->codegen_model->delete('personas','id',$ID);             
-            redirect(base_url().'index.php/personas/manage/');
+
+             $ID =  $this->uri->segment(3);
+            $banco  = $this->uri->segment(4);
+            $this->db->delete('clientes', array('persona' => $ID, 'banco' => $banco ));             
+            redirect(base_url().'index.php/banco/ver/'.$banco);
+    }
+
+    function devolver_persona_ajax(){
+    	$id_banco=$this->input->get('id_banco');
+    	$id_persona=$this->input->get('id_persona');
+    	$arreglo = array('banco' => $id_banco, 'persona' => $id_persona);
+    	$sql = $this->db->where($arreglo)->get('clientes');
+		$cadena = "";
+
+		foreach ($sql->result_array() as $reg) {
+			$cadena.=$reg['persona'];
+		}
+
+		echo $cadena;
     }
 }
 

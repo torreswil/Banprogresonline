@@ -6,9 +6,10 @@
       <title>Registrar Cliente</title>
       <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
       <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
+      <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet">
       <script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
       <script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
-      
+      <script src="<?php echo base_url()?>js/personas.js"></script>
       <script type="text/javascript">
                var path = '<?php echo base_url()?>';
             jQuery(document).ready(function(){
@@ -37,6 +38,16 @@
             }
 
       </script>
+
+       <style>
+      .container {
+            background: #fff;
+      }
+      #alert {
+            display: none;
+      }
+      </style>
+
 </head>
 <body>
             <div class="container">
@@ -56,7 +67,7 @@
                                     <div class="control-group">
                                           <label class="control-label" for="banco">Banco<span class="required">*</span></label>                                
                                           <div class="controls">
-                                                <input class="input-xlarge" id="banco" type="text" name="banco" value="<?php echo set_value('banco'); ?>"  />
+                                                <input class="input-xlarge" id="banco" type="text" name="banco" value="<?php echo $banco; ?>"  />
                                                 <p class="help-inline"><?php echo form_error('banco','<div>','</div>'); ?></p>
                                           </div>
                                     </div>
@@ -66,6 +77,7 @@
                                           <div class="controls">
                                                 <input class="input-xlarge"  id="id" type="text" name="id" value="<?php echo set_value('id'); ?>"  />
                                                 <p class="help-inline"><?php echo form_error('id','<div>','</div>'); ?></p>
+                                                <p id='advert'></p>
                                           </div>
                                     </div>
                                     
@@ -163,9 +175,9 @@
 
 
                                     <div class="control-group">
-                                    <?php echo form_label('Departamento:','',$atrlabel) ?>
+                                    <?php echo form_label('Departamento','',$atrlabel) ?>
                                     <div class="controls">
-                                    <?php echo form_dropdown('departamento',$dptos,set_value('departamento'),"id='sdep_rec'"); ?>
+                                    <?php echo form_dropdown('departamento_residencia',$dptos,set_value('departamento_residencia'),"id='sdep_rec'"); ?>
                                     <p class="help-inline"><?php echo form_error('departamento','<div>','</div>'); ?></p>
                                     </div>
                                     </div>
@@ -173,13 +185,13 @@
                                     <div class="control-group">
                                     <?php echo form_label('Municipio','',$atrlabel) ?>
                                     <div class="controls">
-                                    <?php echo form_dropdown('municipio',array(), set_value('municipio'),"id='smun_rec'"); ?>
+                                    <?php echo form_dropdown('municipio_residencia',array(), set_value('municipio_residencia'),"id='smun_rec'"); ?>
                                     <p class="help-inline"><?php echo form_error('municipio','<div>','</div>'); ?>    </p> 
                                     </div>
                                     </div>
 
                                     <div class="control-group">
-                                    <label class="control-label" for="localidad">Localidad<span class="required">*</span></label>                                
+                                    <label class="control-label" for="localidad">Vereda/Barrio<span class="required">*</span></label>                                
                                     <div class="controls">
                                     <input class="input-xlarge" id="localidad" type="text" name="localidad" value="<?php echo set_value('localidad'); ?>"  />
                                     <p class="help-inline"><?php echo form_error('localidad','<div>','</div>'); ?></p>
@@ -190,10 +202,20 @@
                               </fieldset>
                               <fieldset>
                                     <legend>Lugar y Fecha de Nacimiento</legend>
+                                    
+                                    <div class="control-group">
+                                    <label class="control-label" for="fecha_nacimiento">Fecha_nacimiento<span class="required">*</span></label>                                
+                                    <div class="controls input-append date" id="fecha_nacimiento" data-date="2012-10-10" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                                    <input class="span2" size="16" type="text" name="fecha_nacimiento" value="<?php echo set_value('fecha_nacimiento'); ?>" readonly>
+                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <p class="help-inline"><?php echo form_error('fecha_nacimiento','<div>','</div>'); ?></p>
+                                    </div>
+                                    </div>
+
                                     <div class="control-group">
                                     <?php echo form_label('Departamento:','',$atrlabel) ?>
                                     <div class="controls">
-                                    <?php echo form_dropdown('departamento',$dptos,set_value('departamento'),"id='sdep_nac'"); ?>
+                                    <?php echo form_dropdown('departamento_nacimiento',$dptos,set_value('departamento_nacimiento'),"id='sdep_nac'"); ?>
                                     <p class="help-inline"><?php echo form_error('departamento','<div>','</div>'); ?></p>
                                     </div>
                                     </div>
@@ -201,19 +223,12 @@
                                     <div class="control-group">
                                     <?php echo form_label('Municipio', '',$atrlabel) ?>
                                     <div class="controls">
-                                    <?php echo form_dropdown('municipio',array(), set_value('municipio'),"id='smun_nac'"); ?>
+                                    <?php echo form_dropdown('municipio_nacimiento',array(), set_value('municipio_nacimiento'),"id='smun_nac'"); ?>
                                     <p class="help-inline"><?php echo form_error('municipio','<div>','</div>'); ?>  </p>   
                                     </div>
                                     </div>
 
-                                    <div class="control-group"  value="02/16/12" data-date-format="mm/dd/yy">
-                                    <label class="control-label" for="fecha_nacimiento">Fecha_nacimiento<span class="required">*</span></label>                                
-                                    <div class="controls input-append date">
-                                    <input class="span2"  id="fecha_nacimiento" type="text" name="fecha_nacimiento" value="<?php echo set_value('fecha_nacimiento'); ?>"  />
-                                    <p class="help-inline"><?php echo form_error('fecha_nacimiento','<div>','</div>'); ?></p>
-                                    </div>
-                                    </div>
-                                    
+                                                                   
                                     <div class="control-group">
                                     <label class="control-label" for="fecha_registro">Fecha_registro<span class="required">*</span></label>                                
                                     <div class="controls">
@@ -227,23 +242,14 @@
                                             <?php 
                                           $atrboton = array(
                                           'class' => 'btn btn-primary',
+                                          'id'    => 'guardar_persona'
                                           );
 
                                             echo form_submit($atrboton,'Registrar', 'Submit'); ?>
                                           </div>
                                     </div>
 
-                                    <div class="input-append date" id="dp3" data-date="12/02/2012" data-date-format="dd/mm/yyyy">
-                                      <input class="span2" size="16" type="text" value="12/02/2012">
-                                      <span class="add-on"><i class="icon-th"></i></span>
-                                    </div>   
 
-                                    <div class="well">
-                                      <div class="input-append date" id="dpMonths" data-date="102/2012" data-date-format="mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                          <input class="span2" size="16" type="text" value="02/2012" readonly>
-                                          <span class="add-on"><i class="icon-calendar"></i></span>
-                                      </div>  
-                                    </div> 
 
                               </fieldset>
 
@@ -252,40 +258,9 @@
       <script>
             $(function(){
                   window.prettyPrint && prettyPrint();
-                  $('#dp1').datepicker({
-                        format: 'mm-dd-yyyy'
-                  });
-                  $('#dp2').datepicker();
-                  $('#dp3').datepicker();
-                  $('#dp3').datepicker();
-                  $('#dpYears').datepicker();
-                  $('#dpMonths').datepicker();
-                  
-                  
-                  var startDate = new Date(2012,1,20);
-                  var endDate = new Date(2012,1,25);
-                  $('#dp4').datepicker()
-                        .on('changeDate', function(ev){
-                              if (ev.date.valueOf() > endDate.valueOf()){
-                                    $('#alert').show().find('strong').text('The start date can not be greater then the end date');
-                              } else {
-                                    $('#alert').hide();
-                                    startDate = new Date(ev.date);
-                                    $('#startDate').text($('#dp4').data('date'));
-                              }
-                              $('#dp4').datepicker('hide');
-                        });
-                  $('#dp5').datepicker()
-                        .on('changeDate', function(ev){
-                              if (ev.date.valueOf() < startDate.valueOf()){
-                                    $('#alert').show().find('strong').text('The end date can not be less then the start date');
-                              } else {
-                                    $('#alert').hide();
-                                    endDate = new Date(ev.date);
-                                    $('#endDate').text($('#dp5').data('date'));
-                              }
-                              $('#dp5').datepicker('hide');
-                        });
+
+                  $('#fecha_nacimiento').datepicker();
+
             });
       </script>
                   </div>

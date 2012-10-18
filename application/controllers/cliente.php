@@ -17,7 +17,8 @@ class Cliente extends CI_Controller {
 	function manage(){
 		$data['query']=$this->db->get('vistacliente');
 		$data['titulo']='Lista de Clientes';
-		$this->load->view('cliente_list',$data);
+		$data['lista_clientes']=$this->
+		$this->load->view('v_clientes',$data);
 		
     }
 	
@@ -130,8 +131,9 @@ class Cliente extends CI_Controller {
 	
     function delete(){
             $ID =  $this->uri->segment(3);
-            $this->codegen_model->delete('vistacliente','',$ID);             
-            redirect(base_url().'index.php/cliente/manage/');
+            $banco  = $this->uri->segment(4);
+            $this->db->delete('clientes', array('persona' => $ID, 'banco' => $banco ));             
+            redirect(base_url().'index.php/banco/ver');
     }
 }
 

@@ -129,16 +129,24 @@ class Codegen extends CI_Controller {
                     else{
                         //input
                         $add_form[] = '
-                                    <p><label for="'.$k.'">'.$v.$required.'</label>                                
-                                    <input id="'.$k.'" type="'.$type[$k][0].'" name="'.$k.'" value="<?php echo set_value(\''.$k.'\'); ?>"  />
+                                    <div class="control-group">
+                                    <p><label class="control-label" for="'.$k.'">'.$v.$required.'</label>   
+                                    <div class="controls">                             
+                                    <input class="input-xlarge"  id="'.$k.'" type="'.$type[$k][0].'" name="'.$k.'" value="<?php echo set_value(\''.$k.'\'); ?>"  />
                                     <?php echo form_error(\''.$k.'\',\'<div>\',\'</div>\'); ?>
                                     </p>
+                                    </div>
+                                    </div>
                                     ';
                         $edit_form[] = '
-                                    <p><label for="'.$k.'">'.$v.$required.'</label>                                
-                                    <input id="'.$k.'" type="'.$type[$k][0].'" name="'.$k.'" value="<?php echo $result->'.$k.' ?>"  />
+                                    <div class="control-group">
+                                    <p><label class="control-label" for="'.$k.'">'.$v.$required.'</label>    
+                                    <div class="controls">                             
+                                    <input class="input-xlarge" id="'.$k.'" type="'.$type[$k][0].'" name="'.$k.'" value="<?php echo $result->'.$k.' ?>"  />
                                     <?php echo form_error(\''.$k.'\',\'<div>\',\'</div>\'); ?>
                                     </p>
+                                    </di>
+                                    </div>
                                     ';
                         }
                     }

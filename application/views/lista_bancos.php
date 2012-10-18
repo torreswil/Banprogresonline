@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/banprogreso.css">
         <title></title>
         <style type="text/css" media="screen">
 			@import "<?php echo base_url()?>css/site_jui.css";
@@ -40,7 +41,7 @@
 		var latlng = new google.maps.LatLng(5.175727788050049,-72.5684826660156);
 		// define map options
 			  var myOptions = {
-    zoom: 11,
+    zoom: 9,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     center: latlng
   };
@@ -156,11 +157,23 @@
         
 </head>
 <body  class="grid_2_3" onload="initialize(); addMarkers()">
+	<div class="navbar navbar-fixed-top">
+  		<div class="navbar-inner">
+    		<div class="container">
+      	<ul class="nav">
+		  <li class="active">
+		    <a href="#">Home</a>
+		  </li>
+		  <li><a href="#">Link</a></li>
+		  <li><a href="#">Link</a></li>
+		</ul>
+	    	</div>
+	  </div>
+	</div>
 		<div id="fw_container"
 			<div id="fw_content">
-				<div class="well row">
-				<h1 class="span6"><?php echo $titulo ?></h1>
-					<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'index.php/banco/add';?>">Nuevo Banco</a>
+				<div class="well">
+				<h1 class="span4"><?php echo $titulo ?></h1>
 				<div class="clear"></div>
 				
 				</div>
@@ -170,7 +183,7 @@
 					<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'index.php/banco/add/','Add';?>">Nuevo Banco</a>
 					<div class="clear"></div>
 				</div>
-								
+				<div class="table_container">				
         		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">
 				<thead>
 				<tr>
@@ -178,8 +191,9 @@
 					<th>Departamento</th>
 					<th>Municipio</th>
 					<th>Vereda</th>
-					<th>Direccion</th>
-					<th>Fecha creacion</th>
+					<th>Dirección</th>
+					<th>Fecha creación</th>
+					<th></th>
 					<th></th>
 		            <th></th>
 				</tr>
@@ -208,8 +222,9 @@
 							?>
 							
 							<td><?php echo $fila->Fecha;?></td>
-							<td><a class="btn btn-success" href="<?php echo base_url().'index.php/banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
-							<td><?php echo anchor(base_url().'index.php/banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger','onClick'=>'return deletechecked(\' '.base_url().'index.php/banco/delete/'.$fila->Id.' \')'));?></td>	
+							<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'index.php/banco/ver/'.$fila->Id;?>"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
+							<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'index.php/banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
+							<td><?php echo anchor(base_url().'index.php/banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'index.php/banco/delete/'.$fila->Id.' \')'));?></td>	
 						</tr>
 						
 					<?php $i++; endforeach;?>
@@ -225,6 +240,7 @@
 					</tr>
 				</tfoot>
 </table>
+</div>
 <br>
 
 

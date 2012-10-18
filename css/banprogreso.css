@@ -1,0 +1,53 @@
+
+.titulo_tabla{
+margin-bottom: 5px;
+border-bottom: 1px solid #829AC6;
+}
+
+#advert{
+	display: none;
+}
+
+.table_container{
+	min-height: 600px;
+}
+
+#reg-credito .control-group{
+  display: block;
+  float: left;
+  left: 240px;
+  height: 50px;
+  width:287px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+#reg-credito div.controls{
+
+  margin-left: 0px;
+  margin-top: 10px;
+}
+#reg-credito div.controls input{
+display: inline;
+  width: 100px;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+#reg-credito div.controls #guardar_persona{
+float:right;
+margin-right: 20px;
+}
+
+
+div .fecha_desembolso.controls.input-append.date{
+	  width: 100px;
+  margin-left: 0px;
+
+}
+#reg-credito{
+	width: 900px;
+}
+
+#amortizacion{
+  display: none;
+}
+

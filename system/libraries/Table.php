@@ -30,6 +30,7 @@ class CI_Table {
 
 	var $rows				= array();
 	var $heading			= array();
+	var $footer				= array();
 	var $auto_heading		= TRUE;
 	var $caption			= NULL;
 	var $template			= NULL;
@@ -76,6 +77,12 @@ class CI_Table {
 	{
 		$args = func_get_args();
 		$this->heading = $this->_prep_args($args);
+	}
+
+	function set_footer()
+	{
+		$args=func_get_arg();
+		$this->footer = $this->_prep_args($args);
 	}
 
 	// --------------------------------------------------------------------
@@ -363,6 +370,32 @@ class CI_Table {
 
 			$out .= $this->template['tbody_close'];
 			$out .= $this->newline;
+
+			$out .= $this->template['tfoteer_open'];
+			$out .= $this->newline;
+
+			$out .= $this->template['footer_row_start'];
+			$out .= $this->newline;
+
+			foreach ($this->heading as $heading)
+			{
+				$temp = $this->template['footer_cell_start'];
+
+				foreach ($heading as $key => $val)
+				{
+					if ($key != 'data')
+					{
+						$temp = str_replace('<th', "<th $key='$val'", $temp);
+					}
+				}
+
+				$out .= $temp;
+				$out .= isset($heading['data']) ? $heading['data'] : '';
+				$out .= $this->template['footer_cell_end'];
+			}
+
+			$out .= $this->template['footer_row_close'];
+
 		}
 
 		$out .= $this->template['table_close'];
@@ -496,7 +529,7 @@ class CI_Table {
 	function _default_template()
 	{
 		return  array (
-						'table_open'			=> '<table border="0" cellpadding="4" cellspacing="0">',
+						'table_open'			=> '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">',
 
 						'thead_open'			=> '<thead>',
 						'thead_close'			=> '</thead>',
@@ -519,7 +552,16 @@ class CI_Table {
 						'cell_alt_start'		=> '<td>',
 						'cell_alt_end'			=> '</td>',
 
-						'table_close'			=> '</table>'
+						'tfoteer_open'			=>'<tfoot>',
+						'tfoteer_close'			=>'</tfoot>',
+
+						'footer_row_start'		=>'<tr>',
+						'footer_row_close'		=>'</tr>',
+
+						'footer_cell_start'		=>'<th>',
+						'footer_cell_close'		=>'</th>',
+
+						'table_close'			=> '</table>',
 					);
 	}
 

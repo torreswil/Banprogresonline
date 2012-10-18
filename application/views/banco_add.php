@@ -105,16 +105,16 @@ function toggleBounce() {
 <body onload="initialize()">
 	<div class="container">
 		<div class="row">
-			<div class="offset0 span12 well">
+			<div class="offset0 span11 well">
 				<h1 class="offset2"><?php echo $titulo ?></h1>
 			</div>
 		</div>
 		<div class="row">
-			<div class="offset1 span3 well">
+			<div class="offset0 span3 well">
 
 <?php     
-$atributos = array('class' => 'form-inline');
-echo form_open(current_url(),$atributos); ?>
+
+echo form_open(current_url()); ?>
 <?php echo $custom_error; ?>
 
                                     <p><label for="id">Código<span class="required">*</span></label>                                
@@ -143,7 +143,7 @@ echo form_open(current_url(),$atributos); ?>
                                     </p>
                                     
 
-                                    <p><label for="localidad">Localidad<span class="required">*</span></label>                                
+                                    <p><label for="localidad">Vereda/Barrio<span class="required">*</span></label>                                
                                     <input id="localidad" type="text" name="localidad" value="<?php echo set_value('localidad'); ?>"  />
                                     <?php echo form_error('localidad','<div>','</div>'); ?>
                                     </p>
@@ -187,7 +187,7 @@ echo form_open(current_url(),$atributos); ?>
 			</div>
 			
 			
-			<div class="span7 well ">
+			<div class="span7 well">
 				<h4>Arrastre el marcador y sueltelo en el punto en el que se encuentra situada la oficina del banco. Para guiarse mejor puede utilizar la vista Satelite</h4><br>
 				<div id="map_canvas" style="width:100%; height:432px"></div>
 			</div>

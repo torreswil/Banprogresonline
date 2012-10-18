@@ -1,7 +1,7 @@
 <!DOCTYPE >
 <html lang="es" >
 <head>
-	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title><?php echo $titulo?></title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
@@ -160,7 +160,7 @@ echo form_open(current_url()); ?>
 
                                     
 
-                                    <p><label for="localidad">Localidad<span class="required">*</span></label>                                
+                                    <p><label for="localidad">Vereda/Barrio<span class="required">*</span></label>                                
                                     <input id="localidad" type="text" name="localidad" value="<?php echo $result->localidad ?>"  />
                                     <?php echo form_error('localidad','<div>','</div>'); ?>
                                     </p>
@@ -206,6 +206,9 @@ echo form_open(current_url()); ?>
 				<div id="map_canvas" style="width:100%; height:432px"></div>
 			</div>
 
+			<div class="span10">
+				<?php echo $clientes ?>
+			</div>
 		</div>
 	</div>
 </body>

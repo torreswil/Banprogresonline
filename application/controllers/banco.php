@@ -9,6 +9,7 @@ class Banco extends CI_Controller {
 		$this->load->helper(array('form','url','codegen_helper'));
 		$this->load->model('codegen_model','',TRUE);
 		$this->load->model('ubigeo');
+		$this->load->model('bancos');
 	}	
 	
 	function index(){
@@ -41,7 +42,7 @@ class Banco extends CI_Controller {
 
 
 
-		function departamento()
+	function departamento()
 	{
 		$data['dptos']=$this->ubigeo->devolver_departamentos();
 		
@@ -127,10 +128,11 @@ class Banco extends CI_Controller {
 
 			}
 		}
-
 		$this->data['result'] = $this->codegen_model->get('banco','id,id,departamento,nombre_banco,localidad,municipio,direccion,longitud,latitud,fecha_creacion','id = '.$this->uri->segment(3),NULL,NULL,true);
+		$this->data['id_banco']=$this->uri->segment(3);
 		$this->data['titulo'] = 'Editar Banco';
 		$this->data['dptos']=$this->departamento();	
+		$this->data['clientes']=$this->clientes_banco();
 		$this->load->view('banco_edit', $this->data);		
         //$this->template->load('content', 'banco_edit', $this->data);
     }
@@ -139,6 +141,64 @@ class Banco extends CI_Controller {
             $ID =  $this->uri->segment(3);
             $this->codegen_model->delete('banco','id',$ID);             
             redirect(base_url().'index.php/banco/manage/');
+    }
+
+    function clientes_banco(){
+    	$id_banco= $this->uri->segment(3);
+    	$query=$this->bancos->get_clientes_banco($id_banco);
+    	$i=0;
+    	$clientes='<table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">
+				<thead>
+				<tr>
+					<th>Identificación</th>	
+					<th>Nombre</th>
+					<th>Municipio</th>
+					<th>Vereda</th>
+					<th>Celular</th>
+					<th>Ocupación</th>
+					<th></th>
+					<th></th>
+				</tr>
+
+				</thead>
+				<tbody>';
+		foreach($query->result()as $fila):
+			$clientes.='
+						<tr class="odd gradeX">	
+							<td><a onmouseover="highlightMarker('.$i.')">'.$fila->Identificacion.'</a></td>
+							<td>'.$fila->Nombre1.' '.$fila->Apellido1.'</td>
+							<td>'.$this->ubigeo->devolver_municipio($fila->Municipio).'</td>
+							<td>'.$fila->Vereda.'</td>	
+							<td>'.$fila->Celular.'</td>
+							<td>'.$fila->ocupacion.'</td>
+							<td><a class="btn btn-success  btn-mini" href="'.base_url().'index.php/personas/edit/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Editar</a></td>					
+							<td>'.anchor(base_url().'index.php/personas/delete/'.$fila->Identificacion.'/'.$id_banco,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'index.php/personas/delete/'.$fila->Identificacion.'/'.$id_banco.' \')')).'</td></tr>';	
+
+
+		 	$i++; 
+		 endforeach;
+		 $clientes.='</tbody>
+		 				<tfoot>
+		 					<tr>
+		 						<th></th>
+		 						<th></th>
+		 						<th></th>
+		                         <th></th>
+		                         <th></th>
+		                         <th></th>
+		                         <th></th>
+		 					</tr>
+		 				</tfoot>';
+		 return $clientes;
+
+    }
+
+    function ver()
+    {
+    	$this->data['detalles_banco'] = $this->codegen_model->get('banco','id,departamento,nombre_banco,localidad,municipio,direccion,longitud,latitud,fecha_creacion','id = '.$this->uri->segment(3),NULL,NULL,true);
+    	$this->data['clientes'] = $this->clientes_banco();
+    	$this->load->view('detalle_banco',$this->data);
+
     }
 	
 }

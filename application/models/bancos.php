@@ -21,6 +21,12 @@ class bancos extends CI_Model {
 		}
 		return $data;
 	}
+
+	function get_clientes_banco($id_banco){
+
+		$query=$this->db->where('Banco',$id_banco)->get('vistacliente');
+		return $query;
+	}
 	
 }
 

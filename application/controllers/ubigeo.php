@@ -40,6 +40,8 @@ class banco extends CI_Controller {
 		$this->ubigeo->devolver_municipios($coddep);
 		
 	}
+
+	
 } 
 
 ?>

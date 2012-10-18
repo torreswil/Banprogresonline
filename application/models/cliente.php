@@ -3,7 +3,7 @@
 /**
  * 
  */
-class cliente extends CI_Model {
+class Cliente extends CI_Model {
 	
 	function __construct() {
 		
@@ -17,6 +17,13 @@ class cliente extends CI_Model {
 		$this->db->where('id_banco',$banco);
 		$this->db->where('id_persona',$id_cliente);
 		$this->db->get('vistacliente');
+	}
+
+	function edit($id_banco,$id_persona,$data){
+		$this->db->where('banco',$id_banco);
+		$this->db->where('persona',$id_persona);
+		$this->db->update('cliente',$data);
+
 	}
 	
 	
