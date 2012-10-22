@@ -1,19 +1,6 @@
 
-		var monto = $('#monto').val();
-		var plazo = $('#plazo').val();
-		var interes = 1;
-		var pInteres = $('#periodo_intereses').val();//Periodo de pago de intereses (mensual,trimestral,semestras,etc)
-		var pCapital = $('#periodo_capital').val();//Periodo pago de capital(mensual,trimestral,semestras,etc)
-		var fechaInicial = $('#fecha_desembolso').val();//Es la fecha que se toma para iniciar a correr el credito, se supone que es valida desde el html.
-
-		var credito new Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial);
-
-
-
-
-
-		
-
+	
+	var credito = new Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial);
 
 	function Cuota(numero,fecha,valor,intereses,capital,saldo){
 
@@ -142,51 +129,4 @@
 
 
 
-			function cerosIzq(sVal, nPos){
-		    var sRes = sVal;
-		    for (var i = sVal.length; i < nPos; i++)
-		     sRes = "0" + sRes;
-		    return sRes;
-		   }
-
-		 
-		   function armaFecha(nDia, nMes, nAno){
-		    var sRes = cerosIzq(String(nAno), 4);
-		    sRes = sRes + "-" + cerosIzq(String(nMes), 2);
-		    sRes = sRes + "-" + cerosIzq(String(nAno), 2);
-		    return sRes;
-		   }
-
-		 
-		   function sumaMes(nDia, nMes, nAno, nSum){
-
-		   	if (nSum >= 0){
-		   		for (var i = 0; i < Math.abs(nSum); i++){
-		   			if (nMes == 12){
-		   				nMes = 1;
-		   				nAno += 1;
-		   			} else nMes += 1;
-		   		}
-		   	} else {
-		   		for (var i = 0; i < Math.abs(nSum); i++){
-		   			if (nMes == 1){
-		   				nMes = 12;
-		   				nAno -= 1;
-		   			} else nMes -= 1;
-		   		}
-		   	}
-		   	return armaFecha(nDia, nMes, nAno);
-		   }
-
-
-		 
-		   function calcularFecha(fechaInicial, meses){
-		    var sFc1 = fechaInicial;
-		    if (!isNaN(nSum)){
-		     var nDia = parseInt(sFc0.substr(8, 2));
-		     var nMes = parseInt(sFc0.substr(5, 2));
-		     var nAno = parseInt(sFc0.substr(0, 4));
-		     sFc1 = sumaMes(nDia, nMes, nAno, nSum);
-		    }
-		    return sFc1;
-		   }
+			

@@ -54,7 +54,7 @@
                               <div class="control-group">
                                     <p><label class="control-label" for="monto">Monto <span class="required">*</span></label>   
                                           <div class="controls">                             
-                                                <input class="input-xlarge" type="number" id="monto" type="text" name="monto" value="<?php echo set_value('monto'); ?>"  />
+                                                <input class="input-xlarge" type="number" id="monto" min="500000" max="5000000" step="100000" name="monto" value="<?php echo set_value('monto'); ?>"  />
                                                 <?php echo form_error('monto','<div>','</div>'); ?>
                                           </p>
                                     </div>

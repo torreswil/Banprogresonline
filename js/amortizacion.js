@@ -60,7 +60,7 @@ function Cuota(numero,fecha,valor,intereses,capital,saldo){
 	var saldo = saldo;
 
 	this.tomarDatosCuota = function(){
-		var datos = '<tr><td>'+numero+'</td><td>'+fecha+'</td><td>$'+valor.toFixed(0)+'</td><td>$'+intereses.toFixed(0)+'</td><td>$'+capital.toFixed(0)+'</td><td>$'+saldo.toFixed(0)+'</td></tr>';
+		var datos = '<tr><td>'+numero+'</td><td>'+fecha+'</td><td>$ '+valor.toFixed(0)+'</td><td>$ '+intereses.toFixed(0)+'</td><td>$'+capital.toFixed(0)+'</td><td>$ '+saldo.toFixed(0)+'</td></tr>';
 		return datos;
 
 	}

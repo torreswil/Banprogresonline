@@ -2,13 +2,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/banprogreso.css">
         <title></title>
         <style type="text/css" media="screen">
 			@import "<?php echo base_url()?>css/site_jui.css";
 			@import "<?php echo base_url()?>css/demo_table_jui.css";
 			@import "<?php echo base_url()?>css/jquery-ui-1.7.2.custom.css";
-			
+
 			/*
 			 * Override styles needed due to the mix of three different CSS sources! For proper examples
 			 * please see the themes example in the 'Examples' section of this site
@@ -29,11 +28,11 @@
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.js"></script>
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.dataTables.js"></script>
-		
+
 		<script type="text/javascript" charset="utf-8">
 	var geocoder;
 	var map;
-	
+
 	// initializing the map
 	function initialize()
 	{
@@ -41,26 +40,26 @@
 		var latlng = new google.maps.LatLng(5.175727788050049,-72.5684826660156);
 		// define map options
 			  var myOptions = {
-    zoom: 9,
+    zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     center: latlng
   };
-		
-		
+
+
 		// initialize map
 		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-		
+
 		// add event listener for when a user clicks on the map
 		google.maps.event.addListener(map, 'click', function(event) {
 			findAddress(event.latLng);
 		});
 	}
-	
+
 	// finds the address for the given location
 
 	// initialize the array of markers
 	var markers = new Array();
-	
+
 	// the function that adds the markers to the map
 	function addMarkers()
 	{
@@ -68,11 +67,11 @@
 		var lats = document.getElementById('lats').value;
 		var lngs = document.getElementById('lngs').value;
 		var names = document.getElementById('names').value;
-		
+
 		var las = lats.split(";;")
 		var lgs = lngs.split(";;")
 		var nms = names.split(";;")
-		
+
 		// for every location, create a new marker and infowindow for it
 		for (i=0; i<las.length; i++)
 		{
@@ -85,9 +84,9 @@
 					map: window.map,
 					title: nms[i]
 				});
-				
+
 				markers[i] = marker;
-				
+
 				var contentString = [
 				  '<div id="tabs">',
 				  '<ul>',
@@ -106,27 +105,27 @@
 				  '</div>',
 				  '</div>'
 				].join('');
-				
+
 				//var infowindow = new google.maps.InfoWindow;
-				
+
 				//bindInfoWindow(marker, window.map, infowindow, contentString);
 			}
 		}
 	}
-	
+
 	// make conection between infowindow and marker (the infowindw shows up when the user goes with the mouse over the marker)
 	function bindInfoWindow(marker, map, infoWindow, contentString)
 	{
 		google.maps.event.addListener(marker, 'mouseover', function() {
-			
+
 			map.setCenter(marker.getPosition());
-			
+
 			infoWindow.setContent(contentString);
 			infoWindow.open(map, marker);
 			$("#tabs").tabs();
 		 });
 	}
-	
+
 	// highlighting a marker
 		// make the marker show on top of the others
 		// change the selected markers icon
@@ -157,23 +156,11 @@
         
 </head>
 <body  class="grid_2_3" onload="initialize(); addMarkers()">
-	<div class="navbar navbar-fixed-top">
-  		<div class="navbar-inner">
-    		<div class="container">
-      	<ul class="nav">
-		  <li class="active">
-		    <a href="#">Home</a>
-		  </li>
-		  <li><a href="#">Link</a></li>
-		  <li><a href="#">Link</a></li>
-		</ul>
-	    	</div>
-	  </div>
-	</div>
 		<div id="fw_container"
 			<div id="fw_content">
-				<div class="well">
-				<h1 class="span4"><?php echo $titulo ?></h1>
+				<div class="well row">
+				<h1 class="span6"><?php echo $titulo ?></h1>
+					<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'index.php/banco/add';?>">Nuevo Banco</a>
 				<div class="clear"></div>
 				
 				</div>
@@ -183,7 +170,7 @@
 					<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'index.php/banco/add/','Add';?>">Nuevo Banco</a>
 					<div class="clear"></div>
 				</div>
-				<div class="table_container">				
+								
         		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">
 				<thead>
 				<tr>
@@ -191,9 +178,8 @@
 					<th>Departamento</th>
 					<th>Municipio</th>
 					<th>Vereda</th>
-					<th>Dirección</th>
-					<th>Fecha creación</th>
-					<th></th>
+					<th>Direccion</th>
+					<th>Fecha creacion</th>
 					<th></th>
 		            <th></th>
 				</tr>
@@ -218,13 +204,12 @@
 							$lats .= $fila->Latitud.";;";
 							$lngs .= $fila->longitud.";;";
 							$names .= $fila->Nombre.";;";
-							
+
 							?>
 							
 							<td><?php echo $fila->Fecha;?></td>
-							<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'index.php/banco/ver/'.$fila->Id;?>"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
-							<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'index.php/banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
-							<td><?php echo anchor(base_url().'index.php/banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'index.php/banco/delete/'.$fila->Id.' \')'));?></td>	
+							<td><a class="btn btn-success" href="<?php echo base_url().'index.php/banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
+							<td><?php echo anchor(base_url().'index.php/banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger','onClick'=>'return deletechecked(\' '.base_url().'index.php/banco/delete/'.$fila->Id.' \')'));?></td>	
 						</tr>
 						
 					<?php $i++; endforeach;?>
@@ -240,7 +225,6 @@
 					</tr>
 				</tfoot>
 </table>
-</div>
 <br>
 
 
@@ -262,4 +246,4 @@ function deletechecked(link)
 </div>
 </div>
 </div>
-
+</body>
