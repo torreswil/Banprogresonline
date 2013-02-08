@@ -22,7 +22,7 @@
 		function cargarmunicipios () {
 			var cd = $('#sdep').val();
 
-			$.get(path + 'index.php/banco/municipio', {'id' : cd}, function(resp) {
+			$.get(path + 'banco/municipio', {'id' : cd}, function(resp) {
 				$('#smun').empty().html(resp);
 			});
 		}

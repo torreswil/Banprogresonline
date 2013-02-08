@@ -9,6 +9,7 @@ class Personas extends CI_Controller {
 		$this->load->model('codegen_model','',TRUE);
 		$this->load->model('ubigeo');
 		$this->load->model('cliente');
+		$this->load->model('bancos');
 	}	
 	
 	function index(){
@@ -76,7 +77,7 @@ class Personas extends CI_Controller {
 					$this->codegen_model->add('clientes',$data_cliente);
 					//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
 					// or redirect
-					redirect(base_url().'index.php/personas/manage/');
+					redirect(base_url().'personas/manage/');
 				}
 				else
 				{
@@ -94,7 +95,7 @@ class Personas extends CI_Controller {
 					$this->codegen_model->add('clientes',$data_cliente);
 					//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
 					// or redirect
-					redirect(base_url().'index.php/banco/ver/'.$this->input->post('banco'));
+					redirect(base_url().'banco/ver/'.$this->input->post('banco'));
 			}
 		}
 		$this->data['dptos']=$this->ubigeo->devolver_departamentos();	
@@ -143,7 +144,7 @@ class Personas extends CI_Controller {
 			if ($this->codegen_model->edit('personas',$data,'id',$this->input->post('id')) == TRUE)
 			{
 				$this->cliente->edit($this->input->post('banco'),$this->input->post('id'),$cliente);
-				redirect(base_url().'index.php/banco/ver/'.$this->input->post('banco'));
+				redirect(base_url().'banco/ver/'.$this->input->post('banco'));
 			}
 			else
 			{
@@ -157,11 +158,17 @@ class Personas extends CI_Controller {
 				'banco' => $this->uri->segment(4) ,
 				'persona' => $this->uri->segment(3) ,
 		 );
+
 		$this->data['cliente']=$this->codegen_model->get('clientes','ocupacion',$arreglo,NULL,NULL,true);
 		$this->data['banco'] = $this->uri->segment(4);
 		$this->data['dptos']=$this->ubigeo->devolver_departamentos();
-		$this->load->view('personas_edit', $this->data);		
-        //$this->template->load('content', 'personas_edit', $this->data);
+
+		if ($this->data['cliente']) {
+			$this->load->view('personas_edit', $this->data);
+		}
+		else{
+			redirect(base_url().'banco/ver/'.$arreglo['banco']);
+		}	
     }
 	
     function delete(){
@@ -169,7 +176,7 @@ class Personas extends CI_Controller {
              $ID =  $this->uri->segment(3);
             $banco  = $this->uri->segment(4);
             $this->db->delete('clientes', array('persona' => $ID, 'banco' => $banco ));             
-            redirect(base_url().'index.php/banco/ver/'.$banco);
+            redirect(base_url().'banco/ver/'.$banco);
     }
 
     function devolver_persona_ajax(){
@@ -184,6 +191,25 @@ class Personas extends CI_Controller {
 		}
 
 		echo $cadena;
+    }
+
+    function ver()
+    {
+	$id_banco=$this->uri->segment(4);
+	$id_cliente=$this->uri->segment(3);
+	$cliente=$this->cliente->devolver_cliente($id_banco,$id_cliente);
+
+	if ($cliente) {
+		$this->data['cliente']=$cliente;
+		$this->data['municipio']=$this->ubigeo->devolver_mun($cliente->Municipio);
+		$this->data['banco']=$this->bancos->devolver_nombre_banco($id_banco);
+		$this->load->view('detalle_persona',$this->data);
+
+	}
+	else{
+		redirect(base_url().'banco/ver/'.$id_banco);
+	}
+	
     }
 }
 

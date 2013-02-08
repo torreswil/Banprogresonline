@@ -49,6 +49,7 @@
                     <th>Fecha creacion</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
 
                 </thead>
@@ -75,14 +76,16 @@
                             ?>
                             
                             <td><?php echo $fila->Fecha;?></td>
-                            <td><a class="btn btn-success" href="<?php echo base_url().'index.php/banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
-                            <td><?php echo anchor(base_url().'index.php/banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger','onClick'=>'return deletechecked(\' '.base_url().'index.php/banco/delete/'.$fila->Id.' \')'));?></td> 
+                            <td><a class="btn btn-success" href="<?php echo base_url().'banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
+                            <td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/ver/'.$fila->Id;?>"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
+                            <td><?php echo anchor(base_url().'banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger','onClick'=>'return deletechecked(\' '.base_url().'banco/delete/'.$fila->Id.' \')'));?></td> 
                         </tr>
                         
                     <?php $i++; endforeach;?>
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>

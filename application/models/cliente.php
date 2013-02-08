@@ -14,15 +14,17 @@ class Cliente extends CI_Model {
 	
 	function devolver_cliente($banco,$id_cliente){
 		
-		$this->db->where('id_banco',$banco);
-		$this->db->where('id_persona',$id_cliente);
-		$this->db->get('vistacliente');
+		$this->db->where('Banco',$banco);
+		$this->db->where('Identificacion',$id_cliente);
+		$query=$this->db->get('vistacliente');
+		$result=$query->row();
+		return $result;
 	}
 
 	function edit($id_banco,$id_persona,$data){
 		$this->db->where('banco',$id_banco);
 		$this->db->where('persona',$id_persona);
-		$this->db->update('cliente',$data);
+		$this->db->update('clientes',$data);
 
 	}
 	

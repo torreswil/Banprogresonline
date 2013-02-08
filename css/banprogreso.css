@@ -1,4 +1,6 @@
-
+table {
+  font-size: 14px;
+}
 .titulo_tabla{
 margin-bottom: 5px;
 border-bottom: 1px solid #829AC6;
@@ -44,7 +46,7 @@ div .fecha_desembolso.controls.input-append.date{
 
 }
 #reg-credito{
-	width: 900px;
+	width: 600px;
 }
 
 #amortizacion{

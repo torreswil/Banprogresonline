@@ -24,7 +24,7 @@
             function cargarmunicipiosRec () {
                   var cd = $('#sdep_rec').val();
 
-                  $.get(path + 'index.php/banco/municipio', {'id' : cd}, function(resp) {
+                  $.get(path + 'banco/municipio', {'id' : cd}, function(resp) {
                         $('#smun_rec').empty().html(resp);
                   });
             }
@@ -32,7 +32,7 @@
             function cargarmunicipiosNac () {
                   var cd = $('#sdep_nac').val();
 
-                  $.get(path + 'index.php/banco/municipio', {'id' : cd}, function(resp) {
+                  $.get(path + 'banco/municipio', {'id' : cd}, function(resp) {
                         $('#smun_nac').empty().html(resp);
                   });
             }

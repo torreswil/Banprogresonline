@@ -2,11 +2,11 @@
 <!DOCTYPE >
 <html lang="es" >
 <head>
-      <meta charset="utf-8" />
-      <title>Registrar Cliente</title>
-      <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
-      <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Registrar Credito</title>
       <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet">
+      <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
+      <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
       <script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
       <script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
       <script src="<?php echo base_url()?>js/amortizacion.js"></script>
@@ -24,23 +24,56 @@
 <body>
       <div class="container">
 
-            <div class="row">
+            <div class="row show-grid">
                   <div class="offset0 span12 well">
                         <h1>Registrar Credito</h1>
                   </div>
             </div>
 
-            <div class="row">
-                  <div class="span12 well">
+            <div class="row show-grid">
+                  <div class="span3 well">
+                        <legend>Datos del Cliente</legend>
+                        <table>
+                              <tr>
+                                    <td><h4>Nombre:</h4></td>
+                                    <td><?php echo $cliente->Nombre1." ".$cliente->Apellido1 ?></td>
+                              </tr>
+                              <tr>
+                                    <td><h4>Identificacion:</h4></td>
+                                    <td><?php echo $cliente->Identificacion?></td>
+                              </tr>
+                              <tr>
+                                    <td><h4>Celular:</h4></td>
+                                    <td><?php echo $cliente->Celular ?></td>
+                              </tr>
+                              <tr>
+                                    <td><h4>Municipio:</h4></td>
+                                    <td><?php echo $municipio->nombre_municipio ?></td>
+                              </tr>
+                              <tr>
+                                    <td><h4>Vereda/Barrio:</h4></td>
+                                    <td><?php echo $cliente->Vereda ?></td>
+                              </tr>
+                              <tr>
+                                    <td><h4>Direccion:</h4></td>
+                                    <td><?php echo $cliente->Direccion ?></td>
+                              </tr>
+
+
+                        </table>
+                  </div>
+                  <div class="span8 well">
 
                         <?php     
                         $atributos = array('class' => 'form-horizontal span1');
                         echo form_open(current_url(), $atributos); ?>
                         <?php echo $custom_error; ?>
 
+                        <input type="hidden" name="txtIdBanco" value="<?php echo $banco->id ?>">
+                        <input type="hidden" name="txtIdCliente" value="<?php echo $cliente->Identificacion ?>">
                         <fieldset id="reg-credito">
 
-                              <legend>Datos del Credito</legend>
+                              <legend>Establezca los Datos del Crédito </legend>
 
                               <div class="control-group">
                                     <label class="control-label" for="fecha_desembolso">Fecha desembolso<span class="required">*</span></label>                                
@@ -71,10 +104,11 @@
                               </div>
 
 
-                              <!--div class="control-group">
+                              <div class="control-group">
                                     <p><label class="control-label" for="linea_credito">Linea credito<span class="required">*</span></label>   
                                           <div class="controls">                             
-                                                <input class="input-xlarge"  id="linea_credito" type="text" name="linea_credito" value="<?php echo set_value('linea_credito'); ?>"  />
+                                                <select class="input-xlarge" id="linea_credito" type="text" name="linea_credito" ><?php echo $lineas?></select>
+                                                
                                                 <?php echo form_error('linea_credito','<div>','</div>'); ?>
                                           </p>
                                     </div>
@@ -145,7 +179,7 @@
                   <div id="amortizacion" class="offset0 span12 well">
                         <h3>Amortización</h3>
                         <hr>
-                        <table id="tabla-amort"class="table table-striped" id="tabla-pagos">
+                        <table class="table table-striped" id="tabla-pagos">
                             <thead>
                                 <tr>
                                     <th>Cuota</th>

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
-        <title></title>
+        <title>Banco<?php echo " ".$detalles_banco->nombre_banco?></title>
         <style type="text/css" media="screen">
 			@import "<?php echo base_url()?>css/site_jui.css";
 			@import "<?php echo base_url()?>css/demo_table_jui.css";
@@ -45,11 +45,10 @@
 		<div id="fw_container"
 			<div id="fw_content">
 				<div class="well row">
-				<h1 class="span6"><?php echo $detalles_banco->nombre_banco?></h1>
+				<h1 class="span9">Banco Comunal <?php echo " ". $detalles_banco->nombre_banco?></h1>
 				</div>
 			
-				<a class="btn btn-large btn-primary" style="float: right" href="<?php echo base_url().'index.php/personas/add/'.$detalles_banco->id;?>">Nuevo Cliente</a>
-				<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'index.php/creditos/add/';?>">Nuevo Credito</a>
+				<a class="btn btn-large btn-primary" style="float: right" href="<?php echo base_url().'personas/add/'.$detalles_banco->id;?>">Nuevo Cliente</a>
 				<h3>Clientes</h3>
 			<?php echo $clientes?>
 

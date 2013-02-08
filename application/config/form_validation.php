@@ -1,15 +1,6 @@
 <?php
 
 $config = array(
-             	
-
-
-             	
-
-
-             	
-
-
 
              	'abonos' => array(array(
                                 	'field'=>'banco',
@@ -212,16 +203,12 @@ $config = array(
                                 	'label'=>'Periodo_capital',
                                 	'rules'=>'required|trim|xss_clean'
                                 ),
-								array(
-                                	'field'=>'fecha_registro',
-                                	'label'=>'Fecha_registro',
-                                	'rules'=>'required|trim|xss_clean'
-                                ),
-								array(
-                                	'field'=>'transaccion',
-                                	'label'=>'Transaccion',
-                                	'rules'=>'required|trim|xss_clean'
+                                array(
+                                    'field'=>'fecha_desembolso',
+                                    'label'=>'Fecha del desembolso',
+                                    'rules'=>'required|trim|xss_clean'
                                 ))
 			   );
+
 			   
 ?>

@@ -44,6 +44,12 @@ class ubigeo extends CI_Model {
 		}
 		return $municipio;
 	}
+	public function devolver_mun($id)
+	{
+		$query=$this->db->where('id',$id)->get('municipios');
+		$result=$query->row();
+		return $result;
+	}
 
 	public function devolver_departamento($id)
 	{

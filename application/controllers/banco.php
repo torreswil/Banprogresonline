@@ -82,7 +82,7 @@ class Banco extends CI_Controller {
 			{
 				//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
 				// or redirect
-				redirect(base_url().'index.php/banco/manage/');
+				redirect(base_url().'banco/manage/');
 			}
 			else
 			{
@@ -120,7 +120,7 @@ class Banco extends CI_Controller {
            
 			if ($this->codegen_model->edit('banco',$data,'id',$this->input->post('id')) == TRUE)
 			{
-				redirect(base_url().'index.php/banco/manage/');
+				redirect(base_url().'banco/manage/');
 			}
 			else
 			{
@@ -140,7 +140,7 @@ class Banco extends CI_Controller {
     function delete(){
             $ID =  $this->uri->segment(3);
             $this->codegen_model->delete('banco','id',$ID);             
-            redirect(base_url().'index.php/banco/manage/');
+            redirect(base_url().'banco/manage/');
     }
 
     function clientes_banco(){
@@ -158,6 +158,7 @@ class Banco extends CI_Controller {
 					<th>Ocupación</th>
 					<th></th>
 					<th></th>
+					<th></th>
 				</tr>
 
 				</thead>
@@ -171,10 +172,9 @@ class Banco extends CI_Controller {
 							<td>'.$fila->Vereda.'</td>	
 							<td>'.$fila->Celular.'</td>
 							<td>'.$fila->ocupacion.'</td>
-							<td><a class="btn btn-success  btn-mini" href="'.base_url().'index.php/personas/edit/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Editar</a></td>					
-							<td>'.anchor(base_url().'index.php/personas/delete/'.$fila->Identificacion.'/'.$id_banco,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'index.php/personas/delete/'.$fila->Identificacion.'/'.$id_banco.' \')')).'</td></tr>';	
-
-
+							<td><a class="btn btn-success  btn-mini" href="'.base_url().'personas/edit/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Editar</a></td>					
+							<td><a class="btn btn-success  btn-mini" href="'.base_url().'personas/ver/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Detalles</a></td>
+							<td>'.anchor(base_url().'personas/delete/'.$fila->Identificacion.'/'.$id_banco,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'personas/delete/'.$fila->Identificacion.'/'.$id_banco.' \')')).'</td></tr>';
 		 	$i++; 
 		 endforeach;
 		 $clientes.='</tbody>
@@ -183,6 +183,7 @@ class Banco extends CI_Controller {
 		 						<th></th>
 		 						<th></th>
 		 						<th></th>
+		                         <th></th>
 		                         <th></th>
 		                         <th></th>
 		                         <th></th>

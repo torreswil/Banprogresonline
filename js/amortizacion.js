@@ -203,12 +203,13 @@ function sumaMes(nDia, nMes, nAno, nSum){
 
 
 function calcularFecha(fechaInicial, meses){
-var sFc1 = fechaInicial;
-if (!isNaN(meses)){
+var sFc1 = new Date(fechaInicial);
+/*if (!isNaN(meses)){
  var nDia = parseInt(fechaInicial.substr(8, 2));
  var nMes = parseInt(fechaInicial.substr(5, 2));
  var nAno = parseInt(fechaInicial.substr(0, 4));
  sFc1 = sumaMes(nDia, nMes, nAno, meses);
-}
-return sFc1;
+}*/
+sFc1.setMonth(sFc1.getMonth()+meses);
+return sFc1.toISOString().substr(0, 10);
 }

@@ -27,6 +27,13 @@ class bancos extends CI_Model {
 		$query=$this->db->where('Banco',$id_banco)->get('vistacliente');
 		return $query;
 	}
+
+	function devolver_nombre_banco($id_banco){
+		$this->db->where('id',$id_banco);
+		$query=$this->db->get('banco');
+		$result=$query->row();
+		return $result;
+	}
 	
 }
 

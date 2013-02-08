@@ -7,6 +7,10 @@ class Creditos extends CI_Controller {
 		$this->load->library('form_validation');		
 		$this->load->helper(array('form','url','codegen_helper'));
 		$this->load->model('codegen_model','',TRUE);
+		$this->load->model('cliente');
+		$this->load->model('bancos');
+		$this->load->model('ubigeo');
+		$this->load->model('lineas');
 	}	
 	
 	function index(){
@@ -36,7 +40,7 @@ class Creditos extends CI_Controller {
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
 		
-        if ($this->form_validation->run('creditos') == false)
+        if ($this->form_validation->run('creditos') == false or $this->form_validation->run('transaccion') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
 
@@ -51,6 +55,8 @@ class Creditos extends CI_Controller {
 					'fecha_registro' => set_value('fecha_registro'),
 					'transaccion' => set_value('transaccion')
             );
+
+
            
 			if ($this->codegen_model->add('creditos',$data) == TRUE)
 			{
@@ -63,7 +69,9 @@ class Creditos extends CI_Controller {
 				$this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
 
 			}
-		}		   
+		}
+		$this->data['lineas']=$this->lineas->obtener_todas($id_banco=$this->uri->segment(4));
+		$this->ver_cliente();  
 		$this->load->view('creditos_add', $this->data);   
         //$this->template->load('content', 'creditos_add', $this->data);
     }	
@@ -90,7 +98,7 @@ class Creditos extends CI_Controller {
            
 			if ($this->codegen_model->edit('creditos',$data,'id_credito',$this->input->post('id_credito')) == TRUE)
 			{
-				redirect(base_url().'index.php/creditos/manage/');
+				redirect(base_url().'creditos/manage/');
 			}
 			else
 			{
@@ -110,6 +118,21 @@ class Creditos extends CI_Controller {
             $this->codegen_model->delete('creditos','id_credito',$ID);             
             redirect(base_url().'index.php/creditos/manage/');
     }
+
+    function ver_cliente(){
+	    $id_banco=$this->uri->segment(4);
+		$id_cliente=$this->uri->segment(3);
+		$cliente=$this->cliente->devolver_cliente($id_banco,$id_cliente);
+		$this->data['cliente']=$cliente;
+		$this->data['municipio']=$this->ubigeo->devolver_mun($cliente->Municipio);
+		$this->data['banco']=$this->bancos->devolver_nombre_banco($id_banco);
+		return $this->data;	
+    }
+
+    function guardar_transaccion_credito(){
+    	
+    }
+
 }
 
 /* End of file creditos.php */
