@@ -12,7 +12,7 @@ class Creditos extends CI_Controller {
 		$this->load->model('ubigeo');
 		$this->load->model('lineas');
 		$this->load->model('transacciones');
-
+		$this->load->model('credito');
 	}	
 	
 	function index(){
@@ -146,9 +146,11 @@ class Creditos extends CI_Controller {
     }
 
 
-    function abonos(){
-
-    	$datos_credito=
+    function ver(){
+    	$id_banco=$this->uri->segment(4);
+    	$id_credito=$this->uri->segment(3);
+    	$credito=$this->credito->devolver_credito($id_banco,$id_credito);
+    	echo $credito->monto;
 
     }
 

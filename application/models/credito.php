@@ -3,7 +3,7 @@
 /**
  * 
  */
-class Creditos extends CI_Model {
+class Credito extends CI_Model {
 	
 	function __construct() {
 		
@@ -13,15 +13,12 @@ class Creditos extends CI_Model {
 	
 	function devolver_credito($banco,$id_credito){
 		
-		$this->db->where('Banco',$banco);
-		$this->db->where('Identificacion',$id_credito);
-		$query=$this->db->get('vistacliente');
+		$this->db->where('banco',$banco);
+		$this->db->where('id_credito',$id_credito);
+		$query=$this->db->get('vistacreditos');
 		$result=$query->row();
 		return $result;
 	}
-
-	
-	
 
 }
 ?>
