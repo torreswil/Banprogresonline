@@ -42,15 +42,24 @@
                         		<td><h4>Direccion:</h4></td>
                         		<td><?php echo $cliente->Direccion ?></td>
                         	</tr>
-
-
                         </table>
+                        <a class="btn btn-success  btn-large" href="<?php echo base_url().'personas/edit/'.$cliente->Identificacion.'/'.$banco->id ?>"><i class="icon-refresh icon-white"></i> Editar</a>
                   </div>
                   <div class="span8 well">
                   	<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'creditos/add/'.$cliente->Identificacion.'/'.$banco->id?>">Nuevo Credito</a>
                   	<legend>Creditos Asignados</legend>
 
-
+                    <table class="table table-striped" id="credito_asignados">
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Monto</th>
+                                                <th>Plazo</th>
+                                                <th>Fecha</th>
+                                          </thead>
+                                          <tbody>
+                                            <?php echo $creditos ?>
+                                          </tbody>
                   </div>
             </div>
 			

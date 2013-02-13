@@ -1,5 +1,4 @@
 <?php 
-
 /**
  * 
  */
@@ -13,7 +12,9 @@ class Transacciones extends CI_Model {
 
 	function obtener_ultimo_id()
 	{
-		
+		$query=$this->db->select_max('id')->get('transacciones');
+		$fila=$query->row();
+		return $fila->id;	 
 	}
 
 

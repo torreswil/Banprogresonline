@@ -144,7 +144,7 @@ class Personas extends CI_Controller {
 			if ($this->codegen_model->edit('personas',$data,'id',$this->input->post('id')) == TRUE)
 			{
 				$this->cliente->edit($this->input->post('banco'),$this->input->post('id'),$cliente);
-				redirect(base_url().'banco/ver/'.$this->input->post('banco'));
+				redirect(base_url().'personas/ver/'.$cliente['persona'].'/'.$cliente['banco']);
 			}
 			else
 			{
@@ -195,22 +195,25 @@ class Personas extends CI_Controller {
 
     function ver()
     {
-	$id_banco=$this->uri->segment(4);
-	$id_cliente=$this->uri->segment(3);
-	$cliente=$this->cliente->devolver_cliente($id_banco,$id_cliente);
+		$id_banco=$this->uri->segment(4);
+		$id_cliente=$this->uri->segment(3);
+		$cliente=$this->cliente->devolver_cliente($id_banco,$id_cliente);
 
-	if ($cliente) {
-		$this->data['cliente']=$cliente;
-		$this->data['municipio']=$this->ubigeo->devolver_mun($cliente->Municipio);
-		$this->data['banco']=$this->bancos->devolver_nombre_banco($id_banco);
-		$this->load->view('detalle_persona',$this->data);
+		if ($cliente) {
+			$this->data['creditos']=$this->cliente->creditos($this->uri->segment(4),$this->uri->segment(3));;
+			$this->data['cliente']=$cliente;
+			$this->data['municipio']=$this->ubigeo->devolver_mun($cliente->Municipio);
+			$this->data['banco']=$this->bancos->devolver_nombre_banco($id_banco);
+			$this->load->view('detalle_persona',$this->data);
 
-	}
-	else{
-		redirect(base_url().'banco/ver/'.$id_banco);
-	}
+		}
+		else{
+			redirect(base_url().'banco/ver/'.$id_banco);
+		}
 	
+
     }
+
 }
 
 /* End of file personas.php */

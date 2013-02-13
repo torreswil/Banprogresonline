@@ -5,10 +5,13 @@ $(document).ready(function(){
 	});
 
 	$('#monto,#plazo,#periodo_capital,#periodo_intereses').keyup(function(){
-
 		mostrarCuotas();
-
 	});
+
+	$('#monto,#fecha_desembolso').change(function(){
+		mostrarCuotas();
+	});
+
 	$('#fecha_desembolso').focusout(function(){
 
 		mostrarCuotas();
@@ -82,22 +85,9 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 	var valorCuotaCapital = monto/numAbonosCapital;
 
 
-	function calcularNumAbonos(plazo,periodo){
-		if(plazo%periodo==0){
-			return plazo/periodo;
-		}
-		else{
-			var num = Math.floor(plazo/periodo)+1;
-			return num;
-		}
-	}
-
 	this.tomarCuotas = function(){
 			return cuotas;
 		};
-
-
-
 
 	this.calcularCuotas= function(){
 		var valorCuota=0;
@@ -152,55 +142,17 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 		}
 	}
 
+	function calcularNumAbonos(plazo,periodo){
+		if(plazo%periodo==0){
+			return plazo/periodo;
+		}
+		else{
+			var num = Math.floor(plazo/periodo)+1;
+			return num;
+		}
+	}
+
 };
-
-
-function calcularNumAbonos(plazo,periodo){
-	if(plazo%periodo==0){
-		return plazo/periodo;
-	}
-	else{
-		return (plazo/periodo)+1;
-	}
-}
-
-function cerosIzq(sVal, nPos){
-var sRes = sVal;
-for (var i = sVal.length; i < nPos; i++)
- sRes = "0" + sRes;
-return sRes;
-}
-
-
-function armaFecha(nDia, nMes, nAno){
-var sRes = cerosIzq(String(nAno), 4);
-sRes = sRes + "-" + cerosIzq(String(nMes), 2);
-sRes = sRes + "-" + cerosIzq(String(nDia), 2);
-return sRes;
-}
-
-
-function sumaMes(nDia, nMes, nAno, nSum){
-
-	if (nSum >= 0){
-		for (var i = 0; i < Math.abs(nSum); i++){
-			if (nMes == 12){
-				nMes = 1;
-				nAno += 1;
-			} else nMes += 1;
-		}
-	} else {
-		for (var i = 0; i < Math.abs(nSum); i++){
-			if (nMes == 1){
-				nMes = 12;
-				nAno -= 1;
-			} else nMes -= 1;
-		}
-	}
-	return armaFecha(nDia, nMes, nAno);
-}
-
-
 
 function calcularFecha(fechaInicial, meses){
 var sFc1 = new Date(fechaInicial);

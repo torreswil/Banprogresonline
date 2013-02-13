@@ -11,6 +11,8 @@ class Creditos extends CI_Controller {
 		$this->load->model('bancos');
 		$this->load->model('ubigeo');
 		$this->load->model('lineas');
+		$this->load->model('transacciones');
+
 	}	
 	
 	function index(){
@@ -46,29 +48,43 @@ class Creditos extends CI_Controller {
 
         } else
         {                            
-            $data = array(
+            
+            $transac=array(
+            		'banco'=> $this->uri->segment(4),
+            		'tipo_transac'=>1,
+            		'valor'=>set_value('monto'),
+            		'fecha'=>set_value('fecha_desembolso')
+            	);
+
+            if ($this->codegen_model->add('transacciones',$transac) == TRUE) {
+            	$transaccion=$this->transacciones->obtener_ultimo_id();
+            	if($transaccion){
+            		$data = array(
+            		'banco'=> $this->uri->segment(4),
+            		'persona'=> $this->uri->segment(3),
                     'monto' => set_value('monto'),
 					'plazo' => set_value('plazo'),
 					'linea_credito' => set_value('linea_credito'),
 					'periodo_intereses' => set_value('periodo_intereses'),
 					'periodo_capital' => set_value('periodo_capital'),
-					'fecha_registro' => set_value('fecha_registro'),
-					'transaccion' => set_value('transaccion')
-            );
+					'transaccion'=>$transaccion,
+            		);
 
+            		if ($this->codegen_model->add('creditos',$data) == TRUE)
+						{
+							//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
+							// or redirect
+							redirect(base_url().'index.php/personas/ver/'.$this->uri->segment(3).'/'.$this->uri->segment(4));
+						}
+						else
+						{
+							$this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
 
+						}
+            	}
+            }
            
-			if ($this->codegen_model->add('creditos',$data) == TRUE)
-			{
-				//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
-				// or redirect
-				redirect(base_url().'index.php/creditos/manage/');
-			}
-			else
-			{
-				$this->data['custom_error'] = '<div class="form_error"><p>An Error Occured.</p></div>';
-
-			}
+			
 		}
 		$this->data['lineas']=$this->lineas->obtener_todas($id_banco=$this->uri->segment(4));
 		$this->ver_cliente();  
@@ -129,9 +145,14 @@ class Creditos extends CI_Controller {
 		return $this->data;	
     }
 
-    function guardar_transaccion_credito(){
-    	
+
+    function abonos(){
+
+    	$datos_credito=
+
     }
+
+
 
 }
 
