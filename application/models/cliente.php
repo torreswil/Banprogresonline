@@ -30,11 +30,9 @@ class Cliente extends CI_Model {
 		$this->db->where('banco',$id_banco);
 		$this->db->where('cliente',$id_persona);
 		$sql=$this->db->get('vistacreditos');
-		setlocale(LC_MONETARY, 'en_US');
-
 		$cadena = "";
 		foreach ($sql->result_array() as $fila) {
-			$cadena.='<tr><td>'.$fila['id_credito'].'</td><td>$'.number_format($fila['monto'], 0,",",".").'</td><td>'.$fila['plazo'].'</td><td>'.$fila['fecha_desembolso'].'</td><td><a class="btn btn-success btn-mini" href="'.base_url().'creditos/ver/'.$fila['id_credito'].'/'.$id_banco.'"><i class="icon-eye-open icon-white"></i> Detalles</a></td></tr>';
+			$cadena.='<tr><td>'.$fila['id_credito'].'</td><td>$'.number_format($fila['monto'], 0,",",".").'</td><td>'.$fila['plazo'].'</td><td>'.$fila['fecha_desembolso'].'</td><td><a class="btn btn-success btn-mini" href="'.base_url().'creditos/ver/'.$fila['id_credito'].'/'.$id_persona.'/'.$id_banco.'"><i class="icon-eye-open icon-white"></i> Detalles</a></td></tr>';
 		}
 		return $cadena;
 	}

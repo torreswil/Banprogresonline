@@ -1,6 +1,9 @@
 <?php
 
 $config = array(
+             	
+
+
 
              	'abonos' => array(array(
                                 	'field'=>'banco',
@@ -8,13 +11,13 @@ $config = array(
                                 	'rules'=>'required|trim|xss_clean'
                                 ),
 								array(
-                                	'field'=>'fecha_registro',
-                                	'label'=>'Fecha_registro',
+                                	'field'=>'fecha_abono',
+                                	'label'=>'Fecha Abono',
                                 	'rules'=>'required|trim|xss_clean'
                                 ),
 								array(
-                                	'field'=>'transaccion',
-                                	'label'=>'Transaccion',
+                                	'field'=>'valor',
+                                	'label'=>'Valor',
                                 	'rules'=>'required|trim|xss_clean'
                                 ),
 								array(
@@ -208,7 +211,41 @@ $config = array(
                                     'label'=>'Fecha del desembolso',
                                     'rules'=>'required|trim|xss_clean'
                                 ))
-			   );
+			   
 
+			   
+				,
+
+				'vistaabonos' => array(array(
+                                	'field'=>'banco',
+                                	'label'=>'Banco',
+                                	'rules'=>'required|trim|xss_clean'
+                                ),
+								array(
+                                	'field'=>'cliente',
+                                	'label'=>'Cliente',
+                                	'rules'=>'required|trim|xss_clean'
+                                ),
+								array(
+                                	'field'=>'credito',
+                                	'label'=>'Credito',
+                                	'rules'=>'required|trim|xss_clean'
+                                ),
+								array(
+                                	'field'=>'valor',
+                                	'label'=>'Valor',
+                                	'rules'=>'required|trim|xss_clean'
+                                ),
+								array(
+                                	'field'=>'fecha',
+                                	'label'=>'Fecha',
+                                	'rules'=>'required|trim|xss_clean'
+                                ),
+								array(
+                                	'field'=>'soporte',
+                                	'label'=>'Soporte',
+                                	'rules'=>'required|trim|xss_clean'
+                                ))
+			   );
 			   
 ?>

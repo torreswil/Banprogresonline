@@ -38,7 +38,7 @@ class Creditos extends CI_Controller {
 		
     }
 	
-    function add(){        
+    function add(){
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
 		
@@ -92,7 +92,7 @@ class Creditos extends CI_Controller {
         //$this->template->load('content', 'creditos_add', $this->data);
     }	
     
-    function edit(){        
+    function edit(){
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
 		
@@ -147,16 +147,39 @@ class Creditos extends CI_Controller {
 
 
     function ver(){
-    	$id_banco=$this->uri->segment(4);
+    	$id_banco=$this->uri->segment(5);
     	$id_credito=$this->uri->segment(3);
+    	$id_cliente=$this->uri->segment(4);
+    	$cliente=$this->cliente->devolver_cliente($id_banco,$id_cliente);
     	$credito=$this->credito->devolver_credito($id_banco,$id_credito);
-    	echo $credito->monto;
-
+    	if($credito){
+        $intereses=$this->credito->devolver_intereses($id_banco,$id_credito);
+        $this->data['banco']=$this->bancos->devolver_nombre_banco($id_banco);
+    	$this->data['intereses']=$intereses;
+    	$this->data['credito']=$credito;
+    	$this->data['cliente']=$cliente;
+    	$this->data['linea']=$this->lineas->devolver_intereses($intereses->linea_credito,$id_banco);
+    	$this->data['municipio']=$this->ubigeo->devolver_mun($cliente->Municipio);
+   		/*$abonos=$this->abonos->devolver_abonos($credito->banco,$credito->id_credito);*/
+    	
+    	$this->load->view('detalles_credito', $this->data); 
+        }   
     }
 
+    function linea(){
+    	$linea=$this->input->get('id');	
+    	$banco=$this->input->get('banco');
+		$interes=$this->lineas->devolver_intereses($linea,$banco);
+		/*echo '<input id="corriente" name="txtInteres" value="'.$interes->int_corriente.'"><input type="hidden" name="txtInteres" value="'.$interes->int_mora.'">';*/
+    	
+    	echo '<div class="oculto"><label id="corriente">'.$interes->int_corriente.'</label>'.'<label id="mora">Interes Mora'.' '.$interes->int_mora.'</label></div>';
+    }
 
-
+    function distribuir_abonos($credito,$abonos){
+    	foreach ($abonos as $fila) {
+    		echo $fila->banco;
+    	}
+    }
 }
-
 /* End of file creditos.php */
 /* Location: ./system/application/controllers/creditos.php */

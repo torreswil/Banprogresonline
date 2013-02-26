@@ -12,6 +12,19 @@ form.form-horizontal{
   margin-left: 0px;
 
 }
+
+.dato-credito{
+  display: inline;
+  font-size: 18px;
+}
+
+
+.eti-credito{
+  display: inline;
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 10px;
+}
 .form-horizontal.control-group{
   margin-bottom: 0px;
 }
@@ -26,12 +39,23 @@ table.datos-cliente{
   border-color: #eed3d7;
   color: #b94a48;
 }
-
+.infor{
+  min-height: 194px;
+}
+.oculto{
+  display: none;
+}
 .table_container{min-height: 600px;}
 
 .titulo_tabla{
 margin-bottom: 5px;
 border-bottom: 1px solid #829AC6;
+}
+
+.inhabil{
+  pointer-events: none;
+  cursor: default;
+  color: green;
 }
 
 #advert{

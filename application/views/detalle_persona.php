@@ -10,12 +10,16 @@
       <div class="container">
 
             <div class="row show-grid">
-                  <div class="span12 well ">
-                        <h1><?php echo $banco->nombre_banco." - ".$cliente->Nombre1." ".$cliente->Apellido1?></h1>
+                  <div class="span12">
+                      <div class="well">
+                        <h2><a href="<?php echo base_url().'banco/ver/'.$banco->id?>"><?php echo 'Banco '.$banco->nombre_banco?></a><?php echo ' - '.$cliente->Nombre1." ".$cliente->Apellido1?></h2>
+                      </div>
                   </div>
             </div>
              <div class="row show-grid">
-                  <div class="span3 well">
+                  <div class="span4">
+                    <div class="well">
+                      <a class="btn btn-success  btn-small" style="float: right" href="<?php echo base_url().'personas/edit/'.$cliente->Identificacion.'/'.$banco->id ?>"><i class="icon-refresh icon-white"></i> Editar</a>
                         <legend>Datos del Cliente</legend>
                         <table>
                         	<tr>
@@ -43,23 +47,29 @@
                         		<td><?php echo $cliente->Direccion ?></td>
                         	</tr>
                         </table>
-                        <a class="btn btn-success  btn-large" href="<?php echo base_url().'personas/edit/'.$cliente->Identificacion.'/'.$banco->id ?>"><i class="icon-refresh icon-white"></i> Editar</a>
+                        
+                    </div>
                   </div>
-                  <div class="span8 well">
-                  	<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'creditos/add/'.$cliente->Identificacion.'/'.$banco->id?>">Nuevo Credito</a>
-                  	<legend>Creditos Asignados</legend>
+                  <div class="span8">
+                    <div class="well">
+                      <div class="infor">
+                    	<a class="btn btn-small btn-primary offset4" style="float: right" href="<?php echo base_url().'creditos/add/'.$cliente->Identificacion.'/'.$banco->id?>"><i class="icon-plus-sign icon-white"></i> Nuevo Credito</a>
+                    	<legend>Creditos Aprobados</legend>
 
-                    <table class="table table-striped" id="credito_asignados">
-                                        <thead>
-                                            <tr>
-                                                <th>Codigo</th>
-                                                <th>Monto</th>
-                                                <th>Plazo</th>
-                                                <th>Fecha</th>
-                                          </thead>
-                                          <tbody>
-                                            <?php echo $creditos ?>
-                                          </tbody>
+                      <table class="table table-striped" id="credito_asignados">
+                                          <thead>
+                                              <tr>
+                                                  <th>Codigo</th>
+                                                  <th>Monto</th>
+                                                  <th>Plazo</th>
+                                                  <th>Fecha</th>
+                                                  <th><th>
+                                            </thead>
+                                            <tbody>
+                                              <?php echo $creditos ?>
+                                            </tbody>
+                      </div> 
+                    </div>                  
                   </div>
             </div>
 			

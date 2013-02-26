@@ -20,5 +20,14 @@ class Credito extends CI_Model {
 		return $result;
 	}
 
+	function devolver_intereses($banco,$id_credito){
+		
+		$this->db->where('banco',$banco);
+		$this->db->where('id_credito',$id_credito);
+		$query=$this->db->get('creditos');
+		$result=$query->row();
+		return $result;
+	}
+
 }
 ?>

@@ -1,0 +1,1 @@
+ALTER TABLE transacciones AUTO_INCREMENT=3 

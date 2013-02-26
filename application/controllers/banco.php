@@ -1,4 +1,3 @@
-
 <?php
 
 class Banco extends CI_Controller {
@@ -42,13 +41,12 @@ class Banco extends CI_Controller {
 
 
 
-	function departamento()
-	{
+	function departamento(){
 		$data['dptos']=$this->ubigeo->devolver_departamentos();
 		
 		return $data ['dptos'];
-
 	}
+	
 	public function municipio()
 	{
 		$coddep=$this->input->get('id');	

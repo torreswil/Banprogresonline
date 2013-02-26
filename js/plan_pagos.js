@@ -1,54 +1,16 @@
 $(document).ready(function(){
-
-	var path = $('#carpeta').val();
-	var linea = $('#linea_credito').val();
-	var banco = $('#txtIdBanco').val();
-	$.get(path + 'creditos/linea', {'id' : linea, 'banco' : banco}, 
-		function(resp) {
-				$('#intereses').empty().html(resp);
-			});
-
-
-	$('#amort').click(function(){
-		mostrarCuotas();
-	});
-
-	$('#monto,#plazo,#periodo_capital,#periodo_intereses').keyup(function(){
-		mostrarCuotas();
-	});
-
-	$('#monto,#fecha_desembolso').change(function(){
-		mostrarCuotas();
-	});
-
-	$('#fecha_desembolso').focusout(function(){
-
-		mostrarCuotas();
-	});
-
-	$('#linea_credito').change(function(){
-	var path = $('#carpeta').val();
-	var linea = $('#linea_credito').val();
-	var banco = $('#txtIdBanco').val();
-	$.get(path + 'creditos/linea', {'id' : linea, 'banco' : banco}, 
-		function(resp) {
-				$('#intereses').empty().html(resp);
-				mostrarCuotas();
-			})
-	
-	});
-
-
-})
+mostrarCuotas();
+});
 
 function mostrarCuotas(){
 		var monto = $('#monto').val();
 		
 		var plazo = $('#plazo').val();
-		var interes = $('#corriente').html();
+		var interes = $('#corriente').val();
 		var pInteres = $('#periodo_intereses').val(); //Periodo de pago de intereses (mensual,trimestral,semestras,etc)
 		var pCapital = $('#periodo_capital').val();//Periodo pago de capital(mensual,trimestral,semestras,etc)
 		var fechaInicial = $('#fecha_desembolso').val();//Es la fecha que se toma para iniciar a correr el credito, se supone que es valida desde el html.
+		$('#pruebas').append('plazocapital');
 		$('#tabla-cuotas').empty();
 		if(monto!==''& plazo!==''& interes!==''& pInteres!==''& pCapital!==''& fechaInicial!==''){
 
@@ -118,7 +80,6 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 		var capitalCuota = 0;//lo que se pagara en la cuota, este valor se pasa cuando se cree la cuota.
 		var fechaCuota = "";
 		var mes = 0;
-		
 		if(pInteres==pCapital){
 			var numCuotas=Math.ceil(plazo/pInteres);
 			var potencia=Math.pow((1+(interes/100)),numCuotas);
@@ -138,13 +99,14 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 			}
 		}	
 		else{
+			
 			for(mes=1;mes<=plazo;mes++){
 
 				interesAdeudado+=saldo*(interes/100);
 				capitalCuota=0;
 				interesCuota=0;
 
-				//En 3 casos se crea una nueva cuota, si se vence interes, si se vence capital o si se vence el PLAZO.
+				//En 3 casos se crea una nueva cuota, si se vence interes, si se vence capital o si se vence el saldo.
 				if(mes%pInteres==0 || mes%pCapital==0 || mes==plazo){
 					
 					fechaCuota=calcularFecha(fechaInicial,mes);
@@ -166,12 +128,14 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 						if(interesCuota==0){
 							interesCuota=interesAdeudado;
 						}
-					}
-
+					
+					
+				}
 					valorCuota=capitalCuota+interesCuota;
 					numCuota+=1;
 					saldo-=capitalCuota;
 					cuotas[numCuota-1] = new Cuota(numCuota,fechaCuota,valorCuota,interesCuota,capitalCuota,saldo);
+					
 				}
 			}
 		}
@@ -200,4 +164,3 @@ var sFc1 = new Date(fechaInicial);
 sFc1.setMonth(sFc1.getMonth()+meses);
 return sFc1.toISOString().substr(0, 10);
 }
-

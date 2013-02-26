@@ -23,6 +23,13 @@ class Lineas extends CI_Model {
 
 		return $cadena;
 	}
+	function devolver_intereses($linea,$banco){
+		$this->db->where('id', $linea);
+		$this->db->where('banco',$banco);
+		$sql=$this->db->get('linea_credito');
+		$result=$sql->row();
+		return $result;
+	}
 
 
 

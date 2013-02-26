@@ -6,11 +6,10 @@
       <title>Registrar Credito</title>
       <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet">
       <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
-      <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
+      <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css">
       <script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
-      <script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
+      <script type="text/javascript" src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
       <script src="<?php echo base_url()?>js/amortizacion.js"></script>
-
       <style>
       .container {
             background: #fff;
@@ -71,8 +70,12 @@
                                           $atributos = array('class' => 'form-horizontal');
                                           echo form_open(current_url(), $atributos); ?>
                                           <?php echo $custom_error; ?>
+                                          <input type="hidden" id="carpeta" value="<?php echo base_url()?>">
                                           <input type="hidden" id="txtIdBanco" name="txtIdBanco" value="<?php echo $banco->id ?>">
-                                          <input type="hidden" name="txtIdCliente" value="<?php echo $cliente->Identificacion ?>">
+                                          <input type="hidden" id="txtIdCliente" name="txtIdCliente" value="<?php echo $cliente->Identificacion ?>">
+                                          <div id="intereses">
+                                                <input type="hidden" id="txtIdCliente" name="txtIdCliente" value="<?php echo $cliente->Identificacion ?>">
+                                          </div>
                                           <fieldset id="reg-credito">
 
                                                 <legend>Establezca los Datos del Crédito </legend>
@@ -135,26 +138,6 @@
                                                       </div>
                                                 </div>
                                                 </fieldset>
-
-                                                <!--div class="control-group">
-                                                      <p><label class="control-label" for="fecha_registro">Fecha registro<span class="required">*</span></label>   
-                                                            <div class="controls">                             
-                                                                  <input class="input-xlarge"  id="fecha_registro" type="text" name="fecha_registro" value="<?php echo set_value('fecha_registro'); ?>"  />
-                                                                  <?php echo form_error('fecha_registro','<div>','</div>'); ?>
-                                                            </p>
-                                                      </div>
-                                                </div-->
-
-
-                                                <!--div class="control-group">
-                                                      <p><label class="control-label" for="transaccion">Transaccion<span class="required">*</span></label>   
-                                                            <div class="controls">                             
-                                                                  <input class="input-xlarge"  id="transaccion" type="text" name="transaccion" value="<?php echo set_value('transaccion'); ?>"  />
-                                                                  <?php echo form_error('transaccion','<div>','</div>'); ?>
-                                                            </p>
-                                                      </div>
-                                                </div-->
-
 
                                                 <div id="amortizar" class="control-group">
                                                            <?php 
