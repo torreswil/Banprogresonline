@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	$('#soporte,#valor,input#fecha_abono').change(function(){
+	$('#soporte,#valor,input#fecha_abono').keyup(function(){
 		var soporte=$('#soporte').val();
 		var valor=$('#valor').val();
 		var fecha_abono=$('input#fecha_abono').val();
@@ -38,6 +38,7 @@ function abonar(){
                                 $('input#valor').val('');
                                 $('input#fecha_abono').val('');
                                 $('#myModal').modal('hide');
+                                distriAbonos();
                                 //location.reload(true);
                             }
     })
@@ -48,8 +49,27 @@ function distriAbonos(){
 	var banco= $('#txtIdBanco').val();
 	var cliente=$('#txtIdCliente').val();
 	var credito=$('#txtIdCredito').val();
-	$('#distri-abonos').empty().html(carpeta);
 	$.get(carpeta + 'abonos/distribuir_abonos', {'banco' : banco, 'cliente' : cliente, 'credito' : credito}, function(respuesta) {
                         $('#distri-abonos').empty().html(respuesta);
                   })
+}
+
+function eliminarAbono(){
+	var baseurl=$('#abonUrl').val();
+	$.ajax({
+                        url: baseurl+"/abonos/abonar",
+                        type: "POST",
+                        data: datos,
+                        success:
+                            function(r)
+                            {
+                                alert(r);
+                                $('input#soporte').val('');
+                                $('input#valor').val('');
+                                $('input#fecha_abono').val('');
+                                $('#myModal').modal('hide');
+                                distriAbonos();
+                                //location.reload(true);
+                            }
+    })
 }

@@ -175,11 +175,6 @@ class Creditos extends CI_Controller {
     	echo '<div class="oculto"><label id="corriente">'.$interes->int_corriente.'</label>'.'<label id="mora">Interes Mora'.' '.$interes->int_mora.'</label></div>';
     }
 
-    function distribuir_abonos($credito,$abonos){
-    	foreach ($abonos as $fila) {
-    		echo $fila->banco;
-    	}
-    }
 }
 /* End of file creditos.php */
 /* Location: ./system/application/controllers/creditos.php */

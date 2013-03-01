@@ -31,14 +31,13 @@ class Cuotas {
 				$capitalCuota=0;
 				$interesCuota=0;
 				if($mes%$pCapital==0 || $mes==$plazo){
-					$fechaCuota=calcularFecha($fechaInicial,$mes);
+					$fechaCuota=$this->calcularFecha($fechaInicial,$mes);
 					$interesCuota=$saldo*($interes/100)*$pCapital;
 					$capitalCuota=$cuotaFija-$interesCuota;
 					$saldo-=$capitalCuota;
 					$valorCuota=$capitalCuota+$interesCuota;
 					$numCuota+=1;
-					$cuotas[$numCuota-1] = array('numCuota'=>$numCuota,'fechaCuota'=>$fechaCuota,'valorCuota'=>$valorCuota,'interesCuota'=>$interesCuota,'capitalCuota'=>$capitalCuota,'saldo'=>$saldo, 'interes_mora_pagado'=>0,'interes_corriente_pagado'=>0,'capital_pagado'=>0,'fecha_ult_abono_cap'=>$fechaCuota, 'deuda_capital'=>$capitalCuota,'interes_mora_deuda'=>0);
-				}
+					$cuotas[$numCuota-1] = array('numCuota'=>$numCuota,'fechaCuota'=>$fechaCuota,'valorCuota'=>$valorCuota,'interesCuota'=>$interesCuota,'capitalCuota'=>$capitalCuota,'saldo'=>$saldo, 'interes_mora_pagado'=>0,'interes_corriente_pagado'=>0,'capital_pagado'=>0,'fecha_ult_abono_mora'=>$fechaCuota, 'deuda_capital'=>$capitalCuota,'interes_mora_deuda'=>0);				}
 			}
 		}	
 		else{
@@ -75,7 +74,7 @@ class Cuotas {
 					$valorCuota=$capitalCuota+$interesCuota;
 					$numCuota+=1;
 					$saldo-=$capitalCuota;
-					$cuotas[$numCuota-1] = array('numCuota'=>$numCuota,'fechaCuota'=>$fechaCuota,'valorCuota'=>$valorCuota,'interesCuota'=>$interesCuota,'capitalCuota'=>$capitalCuota,'saldo'=>$saldo, 'interes_mora_pagado'=>0,'interes_corriente_pagado'=>0,'capital_pagado'=>0,'fecha_ult_abono_cap'=>$fechaCuota, 'deuda_capital'=>$capitalCuota,'interes_mora_deuda'=>0);
+					$cuotas[$numCuota-1] = array('numCuota'=>$numCuota,'fechaCuota'=>$fechaCuota,'valorCuota'=>$valorCuota,'interesCuota'=>$interesCuota,'capitalCuota'=>$capitalCuota,'saldo'=>$saldo, 'interes_mora_pagado'=>0,'interes_corriente_pagado'=>0,'capital_pagado'=>0,'fecha_ult_abono_mora'=>$fechaCuota, 'deuda_capital'=>$capitalCuota,'interes_mora_deuda'=>0);
 				}
 			}
 		}

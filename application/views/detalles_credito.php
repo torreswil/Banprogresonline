@@ -76,7 +76,7 @@
                   <div class="well">
                    <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-small" style="float: right">Abonar a este credito</a>
                    <legend>Datos del Credito</legend>
-                        <div class="span5">
+                        <div class="span7">
                                 <div class="oculto">
                                     <input id="carpeta" name "carpeta" value="<?php echo base_url()?>">
                                     <input  id="txtIdBanco" name="txtIdBanco" value="<?php echo $cliente->Banco?>">
@@ -89,7 +89,7 @@
                                     <input  id="periodo_intereses" name="txtPInteres" value="<?php echo $credito->periodo_intereses?>">
                                     <input  id="periodo_capital" name="txtIdPCapital" value="<?php echo $credito->periodo_capital?>">
                                 </div>
-                              <p><span class="dato-credito">Credito No:</span><label class="eti-credito"><?php echo ' '. number_format($credito->id_credito,0,",",".") ?></label><p>
+                              <p><span class="dato-credito">Credito No:</span><label class="eti-credito"><?php echo ' '. number_format($credito->id_credito,0,",",".") ?></label><span class="dato-credito">Int Corriente:</span><label class="eti-credito"><?php echo ' '. $credito->interes_corriente ?>%</label><span class="dato-credito">Mora:</span><label class="eti-credito"><?php echo ' '. $credito->interes_mora ?>%</label><p>
                               <p><span class="dato-credito">Monto Aprobado:</span><label  class="eti-credito">$<?php echo ' '. number_format($credito->monto,0,",",".") ?></label><p>
                               <p><span class="dato-credito">Fecha desembolso:</span><label  class="eti-credito"><?php echo ' '. $credito->fecha_desembolso ?></label><p>
                               <p><span class="dato-credito">Plazo:</span><label class="eti-credito"><?php echo ' '. $credito->plazo; echo ($credito->plazo) <=1 ? ' Mes' : ' Meses'  ?></label><p>                                          
@@ -135,7 +135,6 @@
                                   </table>
                               </div>
                               <div class="tab-pane fade" id="distri-abonos">
-                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
                               </div>
                               <div class="tab-pane fade" id="dropdown1">
                                     <p id='abonprueba'>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
@@ -193,7 +192,7 @@
             </div>
             <div class="modal-footer">
               <a  class="btn" data-dismiss="modal" >Cerrar</a>
-              <a id="abonar" class="btn btn-primary" disabled="disabled">Abonar</a>
+              <input type="button" id="abonar" class="btn btn-primary" disabled="disabled" value="Abonar">
             </div>
             
           </div>          

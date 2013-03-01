@@ -21,5 +21,11 @@ class pagos extends CI_Model {
 			return $query->result();
 		}
 	}
+
+	function delete($banco,$cliente,$credito){
+		$this->db->where('banco',$banco);
+		$this->db->where('credito',$id_credito);
+		$this->db->where('credito',$id_credito);
+	}
 }
 ?>
