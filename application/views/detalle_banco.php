@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
+        <link rel="shortcut icon" href="<?php echo base_url()?>images/favicon.ico" />
         <title>Banco<?php echo " ".$detalles_banco->nombre_banco?></title>
         <style type="text/css" media="screen">
 			@import "<?php echo base_url()?>css/site_jui.css";
@@ -26,6 +26,7 @@
 			#tabla thead th:first-child { border-left: 1px solid #AAA; }
 			#tabla thead th:last-child { border-right: 1px solid #AAA; }
 		</style>
+		<link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.js"></script>
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.dataTables.js"></script>
@@ -47,10 +48,11 @@
 				<div class="well row">
 				<h1 class="span9">Banco Comunal <?php echo " ". $detalles_banco->nombre_banco?></h1>
 				</div>
-			
+				<div class="well row">
 				<a class="btn btn-large btn-primary" style="float: right" href="<?php echo base_url().'personas/add/'.$detalles_banco->id;?>">Nuevo Cliente</a>
 				<h3>Clientes</h3>
-			<?php echo $clientes?>
+					<?php echo $clientes?>
+				</div>
 
 <script type="text/javascript">
 	function deletechecked(link)

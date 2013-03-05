@@ -1,3 +1,4 @@
+
 table {
   font-size: 16px;
 }
@@ -6,12 +7,21 @@ form.form-horizontal{
   margin-bottom: 0px;
 }
 
+body{
+  background-color: #2D343E;
+}
 
 .controls.input-append.date{
-  width: 100px;
-  margin-left: 0px;
+  margin-left: 20px;
 
 }
+
+
+.container{
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+}
+
 
 .dato-credito{
   display: inline;

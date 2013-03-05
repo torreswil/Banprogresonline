@@ -171,7 +171,7 @@ class Banco extends CI_Controller {
 							<td>'.$fila->Celular.'</td>
 							<td>'.$fila->ocupacion.'</td>
 							<td><a class="btn btn-success  btn-mini" href="'.base_url().'personas/edit/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Editar</a></td>					
-							<td><a class="btn btn-success  btn-mini" href="'.base_url().'personas/ver/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Detalles</a></td>
+							<td><a class="btn btn-success  btn-mini" href="'.base_url().'personas/ver/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
 							<td>'.anchor(base_url().'personas/delete/'.$fila->Identificacion.'/'.$id_banco,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'personas/delete/'.$fila->Identificacion.'/'.$id_banco.' \')')).'</td></tr>';
 		 	$i++; 
 		 endforeach;

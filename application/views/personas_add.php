@@ -40,9 +40,7 @@
       </script>
 
        <style>
-      .container {
-            background: #fff;
-      }
+
       #alert {
             display: none;
       }
@@ -52,7 +50,7 @@
 <body>
             <div class="container">
                   <div class="row">
-                        <div class="offset0 span12 well">
+                        <div class="offset2 span8 well">
                               <h1 class="offset2">Registrar Cliente</h1>
                         </div>
                   </div>

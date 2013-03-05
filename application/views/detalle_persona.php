@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
+        <link rel="shortcut icon" href="<?php echo base_url()?>images/favicon.ico" />
         <title><?php echo $banco->nombre_banco." - ".$cliente->Nombre1." ".$cliente->Apellido1?></title>
         <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
+        <link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
 	</head>
 	<body>
       <div class="container">

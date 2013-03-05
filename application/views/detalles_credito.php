@@ -4,9 +4,9 @@
 <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>Detalles Credito</title>
-      <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet">
       <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
       <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
+      <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet"/>
       <script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
       <script type="text/javascript" src="<?php echo base_url()?>js/bootstrap-tab.js"></script>
       <script type="text/javascript" src="<?php echo base_url()?>js/plan_pagos.js"></script>
@@ -17,9 +17,6 @@
       <!--script src="<?php echo base_url()?>js/amortizacion.js"></script-->
 
       <style>
-      .container {
-            background: #fff;
-      }
       #alert {
             display: none;
       }
@@ -39,7 +36,7 @@
 
           <div class="row">
               <div class="span4">
-                    <div class="well">
+                    <div class="well cliente">
                           <a class="btn btn-success  btn-small" style="float: right" href="<?php echo base_url().'personas/edit/'.$cliente->Identificacion.'/'.$credito->banco ?>"><i class="icon-refresh icon-white"></i> Editar</a>
                           <legend>Datos del Cliente</legend>
                           <br>
@@ -135,6 +132,7 @@
                                   </table>
                               </div>
                               <div class="tab-pane fade" id="distri-abonos">
+                                <hr>
                               </div>
                               <div class="tab-pane fade" id="dropdown1">
                                     <p id='abonprueba'>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>

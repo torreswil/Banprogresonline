@@ -25,10 +25,11 @@
 			#tabla thead th:first-child { border-left: 1px solid #AAA; }
 			#tabla thead th:last-child { border-right: 1px solid #AAA; }
 		</style>
+		<link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.js"></script>
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.dataTables.js"></script>
-
+      	<script type="text/javascript" src="<?php echo base_url()?>js/bootstrap-tab.js"></script>
 		<script type="text/javascript" charset="utf-8">
 	var geocoder;
 	var map;
@@ -45,7 +46,7 @@
     center: latlng
   };
 
-
+  		$('#map_canvas').empty();
 		// initialize map
 		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
@@ -157,8 +158,8 @@
 	
         
 </head>
-<body  class="grid_2_3" onload="initialize(); addMarkers()">
-	<div class="navbar navbar-fixed-top">
+<body  class="grid_2_3">
+	<!--div class="navbar navbar-fixed-top">
   		<div class="navbar-inner">
     	<div class="container">
       	<ul class="nav">
@@ -170,97 +171,105 @@
 		</ul>
 	    	</div>
 	  </div>
-	</div>
+	</div-->
 		<div id="fw_container"
 			<div id="fw_content">
 				<div class="well">
-				<h1 class="span4"><?php echo $titulo ?></h1>
+				<h2 class="span8">Sistema Integrado de Gestion de Bancos Comunales</h2>
 				<div class="clear"></div>
 				
 				</div>
 				<br>
 				<div class="well">
-					<div id="map_canvas" style="width:100%; height:400px"></div>
+					
 					<a class="btn btn-large btn-primary offset4" style="float: right" href="<?php echo base_url().'banco/add/','Add';?>">Nuevo Banco</a>
-					<div class="clear"></div>
+					<ul id="tab" class="nav nav-tabs">
+	                      <li class="active"><a href="#listabancos" data-toggle="tab">Lista de Bancos</a></li>
+	                      <li id="distri"><a onclick="initialize(); addMarkers()" href="#map_canvas" data-toggle="tab">Mapa</a></li>
+
+	                </ul>
+                  	<div id="myTabContent" class="tab-content">
+                      	<div class="tab-pane fade in active" id="listabancos">
+                          	<hr>
+			            	<div class="table_container">				
+					        <table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">
+								<thead>
+									<tr>
+										<th>Nombre</th>	
+										<th>Departamento</th>
+										<th>Municipio</th>
+										<th>Vereda</th>
+										<th>Dirección</th>
+										<th>Fecha creación</th>
+										<th></th>
+										<th></th>
+							            <th></th>
+									</tr>
+
+								</thead>
+								<tbody>
+										<?php
+											$lats = "";			// string with latitude values
+											$lngs = "";			// string with longitude values	// string with address values
+											$names = "";
+											$i=0;
+										?>
+								
+										<?php foreach($query->result()as $fila): ?>
+											<tr class="odd gradeX">	
+												<td><a onmouseover="highlightMarker(<?php echo $i;?>)"><?php echo $fila->Nombre;?></a></td>
+												<td><?php echo $fila->Departamento;?></td>
+												<td><?php echo $fila->Muncipio;?></td>
+												<td><?php echo $fila->Vereda;?></td>	
+												<td><?php echo $fila->Direccion;?></td>
+												<?php 
+												$lats .= $fila->Latitud.";;";
+												$lngs .= $fila->longitud.";;";
+												$names .= $fila->Nombre.";;";
+
+												?>
+												
+												<td><?php echo $fila->Fecha;?></td>
+												<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/ver/'.$fila->Id;?>"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
+												<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
+												<td><?php echo anchor(base_url().'banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'banco/delete/'.$fila->Id.' \')'));?></td>	
+											</tr>
+											
+										<?php $i++; endforeach;?>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th></th>
+										<th></th>
+										<th></th>
+				                        <th></th>
+				                        <th></th>
+				                        <th></th>
+									</tr>
+								</tfoot>
+							</table>
+							</div>
+						</div>
+                      	<div id="map_canvas" class="tab-pane fade" style="width:100%; height:400px">
+                      	</div>
+                    </div>
+					
+					<br>
 				</div>
-				<div class="table_container">				
-        		<table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla">
-				<thead>
-				<tr>
-					<th>Nombre</th>	
-					<th>Departamento</th>
-					<th>Municipio</th>
-					<th>Vereda</th>
-					<th>Dirección</th>
-					<th>Fecha creación</th>
-					<th></th>
-					<th></th>
-		            <th></th>
-				</tr>
+				<script type="text/javascript">
+					function deletechecked(link)
+					{
+					var answer = confirm('Desea borrar este Banco?')
+					if (answer){
+					    window.location = link;
+					}
 
-				</thead>
-				<tbody>
-					<?php
-						$lats = "";			// string with latitude values
-						$lngs = "";			// string with longitude values	// string with address values
-						$names = "";
-						$i=0;
-					?>
-			
-					<?php foreach($query->result()as $fila): ?>
-						<tr class="odd gradeX">	
-							<td><a onmouseover="highlightMarker(<?php echo $i;?>)"><?php echo $fila->Nombre;?></a></td>
-							<td><?php echo $fila->Departamento;?></td>
-							<td><?php echo $fila->Muncipio;?></td>
-							<td><?php echo $fila->Vereda;?></td>	
-							<td><?php echo $fila->Direccion;?></td>
-							<?php 
-							$lats .= $fila->Latitud.";;";
-							$lngs .= $fila->longitud.";;";
-							$names .= $fila->Nombre.";;";
-
-							?>
-							
-							<td><?php echo $fila->Fecha;?></td>
-							<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/ver/'.$fila->Id;?>"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
-							<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
-							<td><?php echo anchor(base_url().'banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'banco/delete/'.$fila->Id.' \')'));?></td>	
-						</tr>
-						
-					<?php $i++; endforeach;?>
-				</tbody>
-				<tfoot>
-					<tr>
-						<th></th>
-						<th></th>
-						<th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-					</tr>
-				</tfoot>
-</table>
-</div>
-<br>
-
-
-<script type="text/javascript">
-function deletechecked(link)
-{
-    var answer = confirm('Desea borrar este Banco?')
-    if (answer){
-        window.location = link;
-    }
-    
-    return false;  
-}
-
-</script>
-<input type="hidden" value="<?php echo $lats;?>" id="lats" name="lats"/>
-<input type="hidden" value="<?php echo $lngs;?>" id="lngs" name="lngs"/>
-<input type="hidden" value="<?php echo $names;?>" id="names" name="names"/>
-</div>
-</div>
-</div>
+					return false;  
+					}
+				</script>
+				<input type="hidden" value="<?php echo $lats;?>" id="lats" name="lats"/>
+				<input type="hidden" value="<?php echo $lngs;?>" id="lngs" name="lngs"/>
+				<input type="hidden" value="<?php echo $names;?>" id="names" name="names"/>
+			</div>
+		</div>
 </body>

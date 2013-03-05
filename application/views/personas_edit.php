@@ -40,9 +40,7 @@
       </script>
 
        <style>
-      .container {
-            background: #fff;
-      }
+
       #alert {
             display: none;
       }
@@ -52,7 +50,7 @@
 <body>
             <div class="container">
                   <div class="row">
-                        <div class="offset0 span12 well">
+                        <div class="offset2 span8 well">
                               <h1 class="offset2">Registrar Cliente</h1>
                         </div>
                   </div>
@@ -64,23 +62,24 @@
                               <?php echo $custom_error; ?>
                               <fieldset>
                                   <legend>Datos Personales</legend>
-                                    <div class="control-group">
-                                          <label class="control-label" for="banco">Banco<span class="required">*</span></label>                                
-                                          <div class="controls">
-                                                <input class="input-xlarge" id="id_banco" type="text" name="banco" value="<?php echo $banco; ?>"  />
-                                                <p  class="help-inline"><?php echo form_error('banco','<div>','</div>'); ?></p>
+                                    <div class="oculto">
+                                          <div class="control-group">
+                                                <label class="control-label" for="banco">Banco<span class="required">*</span></label>                                
+                                                <div class="controls">
+                                                      <input class="input-xlarge" id="id_banco" type="text" name="banco" value="<?php echo $banco; ?>"  />
+                                                      <p  class="help-inline"><?php echo form_error('banco','<div>','</div>'); ?></p>
+                                                </div>
+                                          </div>
+                                          
+                                          <div class="control-group">
+                                          <label class="control-label" for="id">Id<span class="required">*</span></label>                                
+                                                <div class="controls">
+                                                      <input class="input-xlarge"  id="id_cliente" type="text" name="id" value="<?php echo $result->id; ?>"  />
+                                                      <p class="help-inline"><?php echo form_error('id','<div>','</div>'); ?></p>
+                                                      <p id='advert'></p>
+                                                </div>
                                           </div>
                                     </div>
-                                    
-                                    <div class="control-group">
-                                    <label class="control-label" for="id">Id<span class="required">*</span></label>                                
-                                          <div class="controls">
-                                                <input class="input-xlarge"  id="id_cliente" type="text" name="id" value="<?php echo $result->id; ?>"  />
-                                                <p class="help-inline"><?php echo form_error('id','<div>','</div>'); ?></p>
-                                                <p id='advert'></p>
-                                          </div>
-                                    </div>
-                                    
                                     <div class="control-group">
                                     <label class="control-label" for="tipo_id">Tipo_id<span class="required">*</span></label>                                
                                           <div class="controls">

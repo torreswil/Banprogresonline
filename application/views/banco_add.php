@@ -6,6 +6,8 @@
 	<title><?php echo $titulo?></title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
+	<link rel="shortcut icon" href="<?php echo base_url()?>images/favicon.ico" />
+	<link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
 	<script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
 	<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 	

@@ -91,7 +91,7 @@ class Abonos extends CI_Controller {
 				//$interes_corriente_generado=
 				//ciclo para pagar interes de mora
 				$dias_mora=0;
-				echo '<p>Abono No:'.$i.'por:'.$dinero.'</p>';
+				//echo '<p>Abono No:'.$i.'por:'.$dinero.'</p>';
 				$c=1;
 
 
@@ -99,12 +99,12 @@ class Abonos extends CI_Controller {
 				$capital_abonado=$capital_pagado;
 				
 				//distribuyo el capital abonado en las cuotas.
-				echo $capital_abonado .'<p>';
+				//echo $capital_abonado .'<p>';
 				foreach ($cuotas as $cuota) {
 					
 					//echo '<p>' .$cuota['deuda_capital'].' '.$cuota['interes_mora_pagado'].'</p>';
 				}
-				echo '</p>';
+				//echo '</p>';
 
 
 
@@ -149,7 +149,7 @@ class Abonos extends CI_Controller {
 
 								}
 							}
-							echo '<p>Cuota:'.$c.'   Capital Adeudado: '.$cuota['deuda_capital'].' dias mora: '.$dias_mora.'   Interes de Mora:'.$interes_mora.'</p>';
+							//echo '<p>Cuota:'.$c.'   Capital Adeudado: '.$cuota['deuda_capital'].' dias mora: '.$dias_mora.'   Interes de Mora:'.$interes_mora.'</p>';
 							$interes_mora_abono+=$interes_mora;
 						}
 					}
