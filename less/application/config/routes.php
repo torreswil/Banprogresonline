@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "banco";
+$route['default_controller'] = "codegen";
 $route['404_override'] = '';
 
 

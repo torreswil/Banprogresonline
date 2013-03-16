@@ -64,7 +64,7 @@ class Personas extends CI_Controller {
 					'fecha_nacimiento' => set_value('fecha_nacimiento'),
 					'fecha_registro' => set_value('fecha_registro')
             );
-           if($this->codegen_model->add('personas',$data_persona)==FALSE){
+           if($this->codegen_model->edit('personas',$data_persona,'id',$data_persona['id'])==FALSE){
 
 
 				if ($this->codegen_model->add('personas',$data_persona) == TRUE)

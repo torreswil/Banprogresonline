@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    distriAbonos()
 	$('#soporte,#valor,input#fecha_abono').keyup(function(){
 		var soporte=$('#soporte').val();
 		var valor=$('#valor').val();
@@ -52,24 +52,18 @@ function distriAbonos(){
 	$.get(carpeta + 'abonos/distribuir_abonos', {'banco' : banco, 'cliente' : cliente, 'credito' : credito}, function(respuesta) {
                         $('#distri-abonos').empty().html(respuesta);
                   })
-}
+};
 
-function eliminarAbono(){
-	var baseurl=$('#abonUrl').val();
-	$.ajax({
-                        url: baseurl+"/abonos/abonar",
-                        type: "POST",
-                        data: datos,
-                        success:
-                            function(r)
-                            {
-                                alert(r);
-                                $('input#soporte').val('');
-                                $('input#valor').val('');
-                                $('input#fecha_abono').val('');
-                                $('#myModal').modal('hide');
-                                distriAbonos();
-                                //location.reload(true);
-                            }
-    })
-}
+function eliminarAbono(banco,credito,abono){
+    if(confirm("Esta seguro que desea eliminar este abono?"))
+    {
+        var baseurl=$('#abonUrl').val();                  
+        $.get(baseurl+"abonos/delete", {'banco': banco,'credito': credito,'abono': abono},
+            function(respuesta)
+            {
+                alert(respuesta);
+                distriAbonos();
+            }                        
+        )
+    }
+};

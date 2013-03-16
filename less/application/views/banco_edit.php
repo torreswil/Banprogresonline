@@ -5,8 +5,6 @@
 	<title><?php echo $titulo?></title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
-	<link rel="shortcut icon" href="<?php echo base_url()?>images/favicon.ico" />
-	<link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
 	<script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
 	<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 	
@@ -208,6 +206,9 @@ echo form_open(current_url()); ?>
 				<div id="map_canvas" style="width:100%; height:432px"></div>
 			</div>
 
+			<div class="span10">
+				<?php echo $clientes ?>
+			</div>
 		</div>
 	</div>
 </body>

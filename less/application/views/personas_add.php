@@ -62,7 +62,7 @@
                               <?php echo $custom_error; ?>
                               <fieldset>
                                   <legend>Datos Personales</legend>
-                                    <div class="control-group oculto">
+                                    <div class="control-group">
                                           <label class="control-label" for="banco">Banco<span class="required">*</span></label>                                
                                           <div class="controls">
                                                 <input class="input-xlarge" id="banco" type="text" name="banco" value="<?php echo $banco; ?>"  />
@@ -71,23 +71,19 @@
                                     </div>
                                     
                                     <div class="control-group">
-                                    <label class="control-label" for="tipo_id">Tipo_id<span class="required">*</span></label>                                
-                                          <div class="controls">
-                                                <select class="input-xlarge" name="tipo_id" id="tipo_id" value="<?php echo set_value('tipo_id'); ?>">
-                                                      <option value="1">Cedula de Ciudadania</option>
-                                                      <option value="2">Cedula de Extranjeria</option>
-                                                </select>
-                                                <!--input class="input-xlarge"  id="tipo_id" type="text" name="tipo_id" value="<?php echo set_value('tipo_id'); ?>"  /-->
-                                                <p class="help-inline"><?php echo form_error('tipo_id','<div>','</div>'); ?></p>
-                                          </div>
-                                    </div>
-
-                                     <div class="control-group">
-                                    <label class="control-label" for="id">No de Identificacion<span class="required">*</span></label>                                
+                                    <label class="control-label" for="id">Id<span class="required">*</span></label>                                
                                           <div class="controls">
                                                 <input class="input-xlarge"  id="id" type="text" name="id" value="<?php echo set_value('id'); ?>"  />
                                                 <p class="help-inline"><?php echo form_error('id','<div>','</div>'); ?></p>
                                                 <p id='advert'></p>
+                                          </div>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                    <label class="control-label" for="tipo_id">Tipo_id<span class="required">*</span></label>                                
+                                          <div class="controls">
+                                                <input class="input-xlarge"  id="tipo_id" type="text" name="tipo_id" value="<?php echo set_value('tipo_id'); ?>"  />
+                                                <p class="help-inline"><?php echo form_error('tipo_id','<div>','</div>'); ?></p>
                                           </div>
                                     </div>
                                     

@@ -17,41 +17,38 @@ class Abonos extends CI_Controller {
 	
 
     function abonar(){
+	    $transac=array(
+	            'banco'=> $_POST['banco'],
+	            'tipo_transac'=>2,
+	            'valor'=>$_POST['valor'],
+	            'fecha'=>$_POST['fecha_abono']
+	        );
 
-    	if($_POST){
-		    $transac=array(
-		            'banco'=> $_POST['banco'],
-		            'tipo_transac'=>2,
-		            'valor'=>$_POST['valor'],
-		            'fecha'=>$_POST['fecha_abono']
-		        );
+	    if ($this->codegen_model->add('transacciones',$transac) == TRUE) {
+	        $transaccion=$this->transacciones->obtener_ultimo_id();
+	        if($transaccion){
+	            $data = array(
+	            'banco'=> $_POST['banco'],
+	            'persona'=>$_POST['abonCliente'],
+	            'credito'=>$_POST['abonCredito'],
+	            'fecha_registro'=>$_POST['fecha_abono'],
+	            'soporte'=>$_POST['soporte'],
+	            'transaccion'=>$transaccion,
+	            );
 
-		    if ($this->codegen_model->add('transacciones',$transac) == TRUE) {
-		        $transaccion=$this->transacciones->obtener_ultimo_id();
-		        if($transaccion){
-		            $data = array(
-		            'banco'=> $_POST['banco'],
-		            'persona'=>$_POST['abonCliente'],
-		            'credito'=>$_POST['abonCredito'],
-		            'fecha_registro'=>$_POST['fecha_abono'],
-		            'soporte'=>$_POST['soporte'],
-		            'transaccion'=>$transaccion,
-		            );
+	            if ($this->codegen_model->add('abonos',$data) == TRUE)
+	            {
+	                //$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
+	                // or redirect
+	                echo 'El abono se ha realizado con exito';
+	            }
+	            else
+	            {
+	                echo '<div class="form_error"><p>A ocurrido un error.</p></div>';
 
-		            if ($this->codegen_model->add('abonos',$data) == TRUE)
-		            {
-		                //$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
-		                // or redirect
-		                echo 'El abono se ha realizado con exito';
-		            }
-		            else
-		            {
-		                echo '<div class="form_error"><p>A ocurrido un error.</p></div>';
-
-		            }
-		        }
-	   		}
-	   	}
+	            }
+	        }
+	   }
 	}  
 
 	function distribuir_abonos(){	
@@ -70,17 +67,15 @@ class Abonos extends CI_Controller {
 		$i=1;
 		$devolucion=0;
 		//recorre el plan de pagos y pago los intereses de mora pendientes y generados.
-		
 		if($abonos){
 
-			echo '
-			<table class="table table-striped" id="distribucion-abonos">
+			echo '<table class="table table-striped" id="distribucion-abonos">
 			<thead>
 	          	<tr>
 	              <th>Fecha del abono</th>
 	              <th>Valor</th>
 	              <th>Interes de Mora</th>
-	              <th>Interes Corriente</th>
+	              <th>Intereses Corriente</th>
 	              <th>Abono a Capital</th>
 	              <th>Saldo</th>
 	              <th></th>
@@ -104,6 +99,7 @@ class Abonos extends CI_Controller {
 				$capital_abonado=$capital_pagado;
 				
 				//distribuyo el capital abonado en las cuotas.
+				//echo $capital_abonado .'<p>';
 				foreach ($cuotas as $cuota) {
 					
 					//echo '<p>' .$cuota['deuda_capital'].' '.$cuota['interes_mora_pagado'].'</p>';
@@ -114,7 +110,6 @@ class Abonos extends CI_Controller {
 
 				foreach ($cuotas as $cuota) {
 
-					//Distribuyo el capital abonado entre las diferentes cuotas con capital pactado.
 					if($capital_abonado>0){
 						if($cuota['deuda_capital']<$capital_abonado){
 							$capital_abonado-=$cuota['deuda_capital'];
@@ -125,16 +120,12 @@ class Abonos extends CI_Controller {
 							$capital_abonado=0;
 						}
 					}
-					
-
-
+					else{
+					}
 					$dias_mora=0;
 					$interes_mora=0;
 					$fecha_cuota=new DateTime($cuota['fechaCuota']);
 					$fecha_ult_mora= new DateTime($cuota['fecha_ult_abono_mora']);
-					
-
-					//Si hay dinero lo distribuyo en los interes de mora.
 					if($dinero>0){
 						if($credito->interes_mora>0) {
 							if($fecha_abono>$fecha_cuota&&$cuota['deuda_capital']>0){
@@ -162,14 +153,13 @@ class Abonos extends CI_Controller {
 							$interes_mora_abono+=$interes_mora;
 						}
 					}
-
-
+					else{
+					}
 					$c++;
 				}
 				
 				//si queda dinero, distribuyo en los intereses corrientes vencidos hasta la fecha.
-				
-				if($dinero>0&&$saldo>0&&$fecha_credito<$fecha_abono){
+				if($dinero>0&&$saldo>0){
 					$intervalo_corriente=$ultimo_capital->diff($fecha_abono);
 					$meses_corriente=$intervalo_corriente->format('%m');
 					$dias_corriente=$intervalo_corriente->format('%d');
@@ -230,10 +220,9 @@ class Abonos extends CI_Controller {
 	              <td>'.$interes_corriente_abono.'</td>
 	              <td>'.$capital_abono.'</td>
 	              <td>'.$saldo.'</td>
-	              <td><input type="button" id="elim_abono" class="btn btn-danger btn-small" value="Eliminar" onclick="eliminarAbono('.$banco.','.$credito->id_credito.','.$abono->id.')"></td>
+	              <td><a href="'.base_url().'abonos/delete/'.$abono->id.'/'.$abono->cliente.'/'.$credito->id_credito.'/'.$banco.'" data-toggle="modal" id="elim_abono" class="btn btn-danger btn-small" style="float: right">Eliminar</a></td>
 	           	</tr> ';
 			}
-			echo '</tbody>';
 
 		}
 		else{
@@ -241,56 +230,32 @@ class Abonos extends CI_Controller {
 		}
 
 		if($devolucion>0){echo '<p>Saldo a Favor: '.$devolucion.'</p>';}
-		$saldo_corriente_total=0;
-		$fecha_act=date('Y-m-d');
-		$fecha_actual= new DateTime($fecha_act);
-		if($fecha_actual>$ultimo_capital){
+		$fecha_actual=date('Y-m-d');
+		$fecha_actual= new DateTime($fecha_actual);
+		if($ultimo_capital<$fecha_actual){
 			$intervalo_ultimo_cap=$ultimo_capital->diff($fecha_actual);
-			$meses_corriente=$intervalo_ultimo_cap->format('%m');
-			$dias_corriente=$intervalo_ultimo_cap->format('%d');
+			$meses_corriente_saldo=$intervalo_corriente->format('%m');
+			$dias_corriente_saldo=$intervalo_corriente->format('%d');
 			$saldo_corriente_en_meses=($corriente_pactado/100)*$saldo*$meses_corriente;
 			$saldo_corriente_en_dias=(($corriente_pactado/100)/30)*$saldo*$dias_corriente;
-			$saldo_corriente_total=($saldo_corriente_en_meses+$saldo_corriente_en_dias)-$interes_corriente_pagado;
-		}
-		//echo 'Ultimo capital:'.$ultimo_capital->format('Y-m-d').' Fecha Actual:'. $fecha_act .' Cpagado:'.$interes_corriente_pagado;
-		$interes_mora_fecha=0;
+			$saldo_corriente_total=$saldo_corriente_en_meses+$saldo_corriente_en_dias;
 
-		foreach ($cuotas as $cuota) {
-			$dias_mora=0;
-			$interes_mora=0;
-			$fecha_cuota=new DateTime($cuota['fechaCuota']);
-			$fecha_ult_mora= new DateTime($cuota['fecha_ult_abono_mora']);
-
-			if($credito->interes_mora>0) {
-				if($fecha_actual>$fecha_cuota&&$cuota['deuda_capital']>0){
-					$intervalo=$fecha_ult_mora->diff($fecha_actual);
-					$dias_mora=$intervalo->format('%R%a');
-					$interes_mora=$cuota['deuda_capital']*(($credito->interes_mora/100)/30)*$dias_mora;
-					$interes_mora-=$cuota['interes_mora_pagado'];
-				}
-				$interes_mora_fecha+=$interes_mora;
-			}
+			$saldo_mora_en_meses=($credito->interes_mora/100)*$saldo*$meses_corriente;
+			$saldo_mora_en_dias=(($credito->interes_mora/100)/30)*$saldo*$dias_corriente;
+			$saldo_mora_total=$saldo_mora_en_meses+$saldo_mora_en_dias;
+			echo '<p>Interes Corriente a la fecha'.$saldo_corriente_total.'</p>';
+			echo '<p>Interes Mora a la fecha'.$saldo_mora_total.'</p>';
+			echo '<p>Saldo Capital'.$saldo.'</p>';
 		}
-		$total_fecha=0;
-		$total_fecha=$saldo+$saldo_corriente_total+$interes_mora_fecha;
-		echo '<legend>Saldo a la fecha</legend><div class="row">
-		<div class="span2"><span class="label label-success">Saldo Total: '.$total_fecha.'</span></div>
-		<div class="span3"><span class="label label-info">Interes Corriente: '.$saldo_corriente_total.'</span></div>';
-		echo '<div class="span3"><span class="label label-info">Interes Mora: '.$interes_mora_fecha.'</span></div>';
-		echo '<div class="span3"><span class="label label-info">Saldo Capital: '.$saldo.'</span></div></div><hr><br><br><legend>Abonos Realizados</legend><br>';
-		
+
 	}
 
 	function delete(){
-		$banco=$this->input->get('banco');
-		$credito=$this->input->get('credito');
-		$abono=$this->input->get('abono');
-		$transa=$this->transacciones->eliminar_abono($banco,$credito,$abono);
-		if($this->codegen_model->delete('transacciones','id',$transa)==true){
-			echo 'El abono ha sido eliminado con exito';
-		}
-		else{
-			echo 'No se pudo eliminar este abono';
-		}
+		$id =  $this->uri->segment(3);
+		$cliente=$this->uri->segment(4);
+		$credito=$this->uri->segment(5);
+		$credito=$this->uri->segment(6);
+            $this->pagos->delete($id,$cliente,$credito);             
+            redirect(base_url().'creditos/ver/');
 	}
 }

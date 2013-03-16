@@ -102,17 +102,18 @@
                 <div class="span12">
                     <div class="well">
                         <ul id="tab" class="nav nav-tabs">
-                              <li class="active" id="distri"><a href="#distri-abonos" data-toggle="tab">Estado de Cuenta</a></li>
-                              <li><a href="#plan-pagos" data-toggle="tab">Plan de Pagos</a></li>
-                             
-                              
+                              <li id class="active"><a href="#plan-pagos" data-toggle="tab">Plan de Pagos</a></li>
+                              <li id="distri"><a href="#distri-abonos" data-toggle="tab">Abonos Realizados</a></li>
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Desplegable <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#dropdown1" data-toggle="tab">@fat</a></li>
+                                    <li><a href="#dropdown2" data-toggle="tab">@mdo</a></li>
+                                </ul>
+                              </li>
                         </ul>
                           <div id="myTabContent" class="tab-content">
-                              
-                              <div class="tab-pane fade in active" id="distri-abonos">
-                                <hr>
-                              </div>
-                              <div class="tab-pane fade" id="plan-pagos">
+                              <div class="tab-pane fade in active" id="plan-pagos">
                                   <hr>
                                   <table class="table table-striped" id="tabla-pagos">
                                       <thead>
@@ -130,7 +131,15 @@
                                       </tbody>
                                   </table>
                               </div>
-                             
+                              <div class="tab-pane fade" id="distri-abonos">
+                                <hr>
+                              </div>
+                              <div class="tab-pane fade" id="dropdown1">
+                                    <p id='abonprueba'>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                              </div>
+                              <div class="tab-pane fade" id="dropdown2">
+                                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+                              </div>
                           </div>
                     </div>
                 </div>

@@ -3,7 +3,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Banprogreso Online</title>
-        <link rel="shortcut icon" href="<?php echo base_url()?>images/favicon.ico" />
         <style type="text/css" media="screen">
 			@import "<?php echo base_url()?>css/site_jui.css";
 			@import "<?php echo base_url()?>css/demo_table_jui.css";
@@ -204,7 +203,7 @@
 										<th>Fecha creación</th>
 										<th></th>
 										<th></th>
-							            <!--th></th-->
+							            <th></th>
 									</tr>
 
 								</thead>
@@ -233,7 +232,7 @@
 												<td><?php echo $fila->Fecha;?></td>
 												<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/ver/'.$fila->Id;?>"><i class="icon-eye-open icon-white"></i> Detalles</a></td>
 												<td><a class="btn btn-success btn-mini" href="<?php echo base_url().'banco/edit/'.$fila->Id;?>"><i class="icon-refresh icon-white"></i> Editar</a></td>
-												<!--td><?php echo anchor(base_url().'banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'banco/delete/'.$fila->Id.' \')'));?></td-->	
+												<td><?php echo anchor(base_url().'banco/delete/'.$fila->Id,'<i class="icon-trash icon-white"></i> Eliminar',array('class'=>'btn btn-danger btn-mini','onClick'=>'return deletechecked(\' '.base_url().'banco/delete/'.$fila->Id.' \')'));?></td>	
 											</tr>
 											
 										<?php $i++; endforeach;?>
