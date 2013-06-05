@@ -43,8 +43,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'camilinchis';
-$db['default']['database'] = 'bancos';
+$db['default']['password'] = 'vertrigo';
+$db['default']['database'] = 'red_concesionarios';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

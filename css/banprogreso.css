@@ -18,7 +18,7 @@ body{
 
 
 .container{
-  padding: 20px 20px 20px 20px;
+  padding: 5px 10px 10px 10px;
   border-radius: 10px;
 }
 
@@ -29,7 +29,12 @@ body{
   margin-left: 18px;
 }
 
-
+.divisor{
+  border-width: 2px;
+}
+.espacio{
+  margin-top: 60px;
+}
 .eti-credito{
   display: inline;
   font-size: 22px;
@@ -39,7 +44,9 @@ body{
 .form-horizontal.control-group{
   margin-bottom: 0px;
 }
-
+.fw_container{
+  padding: 80px 10px 10px 10px;
+}
 table.datos-cliente{
   margin-bottom: 36px;
 }
@@ -53,21 +60,46 @@ table.datos-cliente{
 .infor{
   min-height: 194px;
 }
-.oculto{
-  display: none;
-}
-.table_container{min-height: 600px;}
-
-.titulo_tabla{
-margin-bottom: 5px;
-border-bottom: 1px solid #829AC6;
-}
 
 .inhabil{
   pointer-events: none;
   cursor: default;
   color: green;
 }
+
+.oculto{
+  display: none;
+}
+
+.saldo{
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  width: 180px;
+  padding: 10px;
+  margin: 10px;
+  margin-bottom: 5px;
+  font-size: 24px;
+  color: orange;
+
+}
+
+
+.table_container{min-height: 600px;}
+
+.titulo-saldo{
+  color: black;
+  display: block;
+  font-size: 12;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.titulo_tabla{
+margin-bottom: 5px;
+border-bottom: 1px solid #829AC6;
+}
+
+
 
 #advert{
 	display: none;

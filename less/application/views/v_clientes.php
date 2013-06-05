@@ -4,9 +4,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <style type="text/css" media="screen">
-			@import "<?php echo base_url()?>css/site_jui.css";
-			@import "<?php echo base_url()?>css/demo_table_jui.css";
-			@import "<?php echo base_url()?>css/jquery-ui-1.7.2.custom.css";
+			@import "css/site_jui.css";
+			@import "css/demo_table_jui.css";
+			@import "css/jquery-ui-1.7.2.custom.css";
 			
 			/*
 			 * Override styles needed due to the mix of three different CSS sources! For proper examples
@@ -25,7 +25,7 @@
 			#tabla thead th:first-child { border-left: 1px solid #AAA; }
 			#tabla thead th:last-child { border-right: 1px solid #AAA; }
 		</style>
-		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
 
 		<script type="text/javascript" charset="UTF-8">
 

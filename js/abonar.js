@@ -33,11 +33,11 @@ function abonar(){
                         success:
                             function(r)
                             {
-                                alert(r);
+                                //alert(r);
                                 $('input#soporte').val('');
                                 $('input#valor').val('');
                                 $('input#fecha_abono').val('');
-                                $('#myModal').modal('hide');
+                                //$('#myModal').modal('hide');
                                 distriAbonos();
                                 //location.reload(true);
                             }

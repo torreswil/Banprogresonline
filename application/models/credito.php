@@ -1,5 +1,4 @@
 <?php 
-
 /**
  * 
  */
@@ -27,6 +26,17 @@ class Credito extends CI_Model {
 		$query=$this->db->get('creditos');
 		$result=$query->row();
 		return $result;
+	}
+
+	function obtener_transac($banco,$cliente,$credito){
+		$this->db->select('transaccion');
+		$this->db->where('banco',$banco);
+		$this->db->where('persona',$cliente);
+		$this->db->where('id_credito',$credito);
+
+		$query=$this->db->get('creditos');
+		$result=$query->row();
+		return $result->transaccion;
 	}
 
 }

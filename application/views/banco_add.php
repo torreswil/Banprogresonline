@@ -105,7 +105,18 @@ function toggleBounce() {
 </script>
 </head>
 <body onload="initialize()">
-	<div class="container">
+	<div class="navbar navbar-fixed-top">
+  		<div class="navbar-inner">
+	    	<div class="container">
+		      	<ul class="nav">
+				  <li>
+				    <a href="<?php echo base_url() ?>banco">Inicio</a>
+				  </li>
+				</ul>
+		    </div>
+	  	</div>
+	</div>
+	<div class="container espacio">
 		<div class="row">
 			<div class="offset0 span11 well">
 				<h1 class="offset2"><?php echo $titulo ?></h1>

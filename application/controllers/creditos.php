@@ -1,5 +1,4 @@
 <?php
-
 class Creditos extends CI_Controller {
     
     function __construct() {
@@ -13,6 +12,7 @@ class Creditos extends CI_Controller {
 		$this->load->model('lineas');
 		$this->load->model('transacciones');
 		$this->load->model('credito');
+        $this->load->model('pagos');
 	}	
 	
 	function index(){
@@ -130,9 +130,20 @@ class Creditos extends CI_Controller {
     }
 	
     function delete(){
-            $ID =  $this->uri->segment(3);
-            $this->codegen_model->delete('creditos','id_credito',$ID);             
-            redirect(base_url().'index.php/creditos/manage/');
+            $banco=$this->input->get('banco');
+            $credito=$this->input->get('credito');
+            $cliente=$this->input->get('persona');
+            $transa=$this->credito->obtener_transac($banco,$cliente,$credito);
+            $numAbonos=$this->pagos->num_abonos($banco,$credito);
+            if ($numAbonos===0){
+
+                if($this->codegen_model->delete('transacciones','id',$transa)==true){
+                    echo 'El credito ha sido eliminado con exito';
+                }
+            }
+            else{
+                echo 'Este credito tiene '.$numAbonos.' abonos, no puede ser eliminado';
+            }
     }
 
     function ver_cliente(){

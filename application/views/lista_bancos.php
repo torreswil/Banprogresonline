@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Banprogreso Online</title>
-        <link rel="shortcut icon" href="<?php echo base_url()?>images/favicon.ico" />
+        <link rel="shortcut icon" href="images/favicon.ico" />
         <style type="text/css" media="screen">
 			@import "<?php echo base_url()?>css/site_jui.css";
 			@import "<?php echo base_url()?>css/demo_table_jui.css";
@@ -160,20 +160,18 @@
         
 </head>
 <body  class="grid_2_3">
-	<!--div class="navbar navbar-fixed-top">
+	<div class="navbar navbar-fixed-top">
   		<div class="navbar-inner">
-    	<div class="container">
-      	<ul class="nav">
-		  <li class="active">
-		    <a href="#">Home</a>
-		  </li>
-		  <li><a href="#">Link</a></li>
-		  <li><a href="#">Link</a></li>
-		</ul>
-	    	</div>
-	  </div>
-	</div-->
-		<div id="fw_container"
+	    	<div class="container">
+		      	<ul class="nav">
+				  <li class="active">
+				    <a href="<?php echo base_url() ?>banco">Inicio</a>
+				  </li>
+				</ul>
+		    </div>
+	  	</div>
+	</div>
+		<div class="fw_container"
 			<div id="fw_content">
 				<div class="well">
 				<h2 class="span8">Sistema Integrado de Gestion de Bancos Comunales</h2>

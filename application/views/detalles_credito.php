@@ -3,7 +3,7 @@
 <html lang="es" >
 <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Detalles Credito</title>
+      <title>Detalles Credito <?php echo $cliente->Nombre1." ".$cliente->Apellido1 ?></title>
       <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
       <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
       <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet"/>
@@ -27,7 +27,18 @@
       </script>
 </head>
 <body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
       <div class="container">
+        <ul class="nav">
+          <li>
+            <a href="<?php echo base_url() ?>banco">Inicio</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+      <div class="container espacio">
           <div class="row">
                 <div class="span12">
                       <h2 class="well"><a href="<?php echo base_url().'banco/ver/'.$banco->id?>"><?php echo $banco->nombre_banco.' - '?></a><a href="<?php echo base_url().'personas/ver/'.$cliente->Identificacion.'/'.$credito->banco ?>"><?php echo $cliente->Nombre1." ".$cliente->Apellido1." - "?></a>Detalles Credito</h2>

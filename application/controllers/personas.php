@@ -62,7 +62,6 @@ class Personas extends CI_Controller {
 					'departamento_nacimiento' => set_value('departamento_nacimiento'),
 					'municipio_nacimiento' => set_value('municipio_nacimiento'),
 					'fecha_nacimiento' => set_value('fecha_nacimiento'),
-					'fecha_registro' => set_value('fecha_registro')
             );
            if($this->codegen_model->add('personas',$data_persona)==FALSE){
 
@@ -131,7 +130,6 @@ class Personas extends CI_Controller {
 					'departamento_nacimiento' => $this->input->post('departamento_nacimiento'),
 					'municipio_nacimiento' => $this->input->post('municipio_nacimiento'),
 					'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
-					'fecha_registro' => $this->input->post('fecha_registro')
             );
 
 			$cliente = array(
@@ -173,7 +171,7 @@ class Personas extends CI_Controller {
 	
     function delete(){
 
-             $ID =  $this->uri->segment(3);
+            $ID =  $this->uri->segment(3);
             $banco  = $this->uri->segment(4);
             $this->db->delete('clientes', array('persona' => $ID, 'banco' => $banco ));             
             redirect(base_url().'banco/ver/'.$banco);

@@ -48,7 +48,19 @@
 
 </head>
 <body>
+
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
             <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="<?php echo base_url() ?>banco">Inicio</a>
+                  </li>
+            </ul>
+      </div>
+</div>
+</div>
+            <div class="container espacio">
                   <div class="row">
                         <div class="offset2 span8 well">
                               <h1 class="offset2">Registrar Cliente</h1>
@@ -208,7 +220,7 @@
                                     <div class="control-group">
                                     <label class="control-label" for="fecha_nacimiento">Fecha_nacimiento<span class="required">*</span></label>                                
                                     <div class="controls input-append date" id="fecha_nacimiento" data-date="2012-10-10" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-                                    <input class="span2" size="16" type="text" name="fecha_nacimiento" value="<?php echo set_value('fecha_nacimiento'); ?>" readonly>
+                                    <input class="span2" size="16" type="text" name="fecha_nacimiento" value="<?php echo set_value('fecha_nacimiento'); ?>">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
                                     <p class="help-inline"><?php echo form_error('fecha_nacimiento','<div>','</div>'); ?></p>
                                     </div>
@@ -231,13 +243,7 @@
                                     </div>
 
                                                                    
-                                    <div class="control-group">
-                                    <label class="control-label" for="fecha_registro">Fecha_registro<span class="required">*</span></label>                                
-                                    <div class="controls">
-                                    <input class="input-xlarge" id="fecha_registro" type="text" name="fecha_registro" value="<?php echo set_value('fecha_registro'); ?>"  />
-                                    <p class="help-inline"><?php echo form_error('fecha_registro','<div>','</div>'); ?></p>
-                                    </div>
-                                    </div>
+                                    
                                     
                                     <div class="control-group">
                                           <div class="controls">

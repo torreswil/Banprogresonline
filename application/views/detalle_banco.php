@@ -43,6 +43,17 @@
         
 </head>
 <body  class="grid_2_3" onload="initialize(); addMarkers()">
+		<div class="navbar navbar-fixed-top">
+  		<div class="navbar-inner">
+	    	<div class="container">
+		      	<ul class="nav">
+				  <li>
+				    <a href="<?php echo base_url() ?>banco">Inicio</a>
+				  </li>
+				</ul>
+		    </div>
+	  	</div>
+	</div>
 		<div id="fw_container"
 			<div id="fw_content">
 				<div class="well row">

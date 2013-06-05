@@ -32,7 +32,12 @@ class Cliente extends CI_Model {
 		$sql=$this->db->get('vistacreditos');
 		$cadena = "";
 		foreach ($sql->result_array() as $fila) {
-			$cadena.='<tr><td>'.$fila['id_credito'].'</td><td>$'.number_format($fila['monto'], 0,",",".").'</td><td>'.$fila['plazo'].'</td><td>'.$fila['fecha_desembolso'].'</td><td><a class="btn btn-success btn-mini" href="'.base_url().'creditos/ver/'.$fila['id_credito'].'/'.$id_persona.'/'.$id_banco.'"><i class="icon-eye-open icon-white"></i> Detalles</a></td></tr>';
+			$cadena.='<tr><td>'.$fila['id_credito'].'</td><td>$'.number_format($fila['monto'], 0,",",".").
+			'</td><td>'.$fila['plazo'].'</td><td>'.$fila['fecha_desembolso'].'</td>
+			<td><a class="btn btn-success btn-mini" href="'.base_url().'creditos/ver/'.$fila['id_credito'].'/'.$id_persona.'/'.$id_banco.'">
+			<i class="icon-eye-open icon-white"></i> Detalles</a></td>
+
+			<td><input type="button" id="id="eliminar-credito"" class="btn btn-danger btn-mini" value="Eliminar" onclick="eliminarCredito('.$id_banco.','.$fila['id_credito'].','.$id_persona.')"></td></tr>';
 		}
 		return $cadena;
 	}

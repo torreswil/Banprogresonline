@@ -69,12 +69,12 @@ $config = array(
                                 array(
                                     'field'=>'ocupacion',
                                     'label'=>'Ocupacion',
-                                    'rules'=>'required|trim|xss_clean'
+                                    'rules'=>'trim|xss_clean'
                                 ),
 								array(
                                 	'field'=>'celular',
                                 	'label'=>'Celular',
-                                	'rules'=>'required|trim|xss_clean'
+                                	'rules'=>'trim|xss_clean'
                                 ),
 								array(
                                 	'field'=>'fijo',
@@ -89,7 +89,7 @@ $config = array(
 								array(
                                 	'field'=>'direccion',
                                 	'label'=>'Direccion',
-                                	'rules'=>'required|trim|xss_clean'
+                                	'rules'=>'trim|xss_clean'
                                 ),
 								array(
                                 	'field'=>'departamento_residencia',
@@ -109,7 +109,7 @@ $config = array(
                                 array(
                                     'field'=>'fecha_nacimiento',
                                     'label'=>'Fecha_nacimiento',
-                                    'rules'=>'required|trim|xss_clean'
+                                    'rules'=>'trim|xss_clean'
                                 ),
 								array(
                                 	'field'=>'departamento_nacimiento',
@@ -119,12 +119,6 @@ $config = array(
 								array(
                                 	'field'=>'municipio_nacimiento',
                                 	'label'=>'Municipio_nacimiento',
-                                	'rules'=>'required|trim|xss_clean'
-                                ),
-								
-								array(
-                                	'field'=>'fecha_registro',
-                                	'label'=>'Fecha_registro',
                                 	'rules'=>'required|trim|xss_clean'
                                 ))
 			   

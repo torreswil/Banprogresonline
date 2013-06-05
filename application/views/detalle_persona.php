@@ -6,9 +6,22 @@
         <title><?php echo $banco->nombre_banco." - ".$cliente->Nombre1." ".$cliente->Apellido1?></title>
         <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css"/>
         <link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
+        <script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>js/credito.js"></script>
 	</head>
 	<body>
-      <div class="container">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <ul class="nav">
+            <li>
+              <a href="<?php echo base_url() ?>banco">Inicio</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="container espacio">
 
             <div class="row show-grid">
                   <div class="span12">
@@ -56,7 +69,7 @@
                       <div class="infor">
                     	<a class="btn btn-small btn-primary offset4" style="float: right" href="<?php echo base_url().'creditos/add/'.$cliente->Identificacion.'/'.$banco->id?>"><i class="icon-plus-sign icon-white"></i> Nuevo Credito</a>
                     	<legend>Creditos Aprobados</legend>
-
+                      <input class="input-xlarge" id="abonUrl" type="hidden" name="url" value="<?php echo base_url()?>" />
                       <table class="table table-striped" id="credito_asignados">
                                           <thead>
                                               <tr>
@@ -69,7 +82,9 @@
                                             <tbody>
                                               <?php echo $creditos ?>
                                             </tbody>
+
                       </div> 
+                      <div id="errores"></div>
                     </div>                  
                   </div>
             </div>

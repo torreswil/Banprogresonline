@@ -22,6 +22,15 @@ class pagos extends CI_Model {
 		}
 	}
 
+	function num_abonos($banco,$id_credito){
+		
+		$this->db->where('banco',$banco);
+		$this->db->where('credito',$id_credito);
+		$this->db->from('vistaabonos');
+		$cant=$this->db->count_all_results();
+		return $cant;
+	}
+
 	function delete($banco,$cliente,$credito){
 		$this->db->where('banco',$banco);
 		$this->db->where('credito',$id_credito);

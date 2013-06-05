@@ -21,7 +21,18 @@
 
 </head>
 <body>
-      <div class="container">
+      <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+            <div class="container">
+                        <ul class="nav">
+                          <li>
+                            <a href="<?php echo base_url() ?>banco">Inicio</a>
+                          </li>
+                        </ul>
+                </div>
+            </div>
+      </div>
+      <div class="container espacio">
               
             <div class="span12">
                   <div class="row">
@@ -94,7 +105,7 @@
                                                 <div class="control-group">
                                                       <p><label class="control-label" for="monto">Monto <span class="required">*</span></label>   
                                                       <div class="controls">                             
-                                                                  <input class="input-xlarge" type="number" id="monto" min="500000" max="5000000" step="100000" name="monto" value="<?php echo set_value('monto'); ?>"  />
+                                                                  <input class="input-xlarge" type="number" id="monto" min="100000" max="50000000" step="100000" name="monto" value="<?php echo set_value('monto'); ?>"  />
                                                                   <?php echo form_error('monto','<div>','</div>'); ?>
                                                       </p>
                                                       </div>

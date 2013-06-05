@@ -65,6 +65,7 @@ class Abonos extends CI_Controller {
 		$fecha_credito=new DateTime($credito->fecha_desembolso);
 		$corriente_pactado=$credito->interes_corriente;
 		$ultimo_capital=$fecha_credito;
+		$interes_pagado_total=0;
 		$interes_corriente_pagado=0;
 		$capital_pagado=0;
 		$i=1;
@@ -97,62 +98,38 @@ class Abonos extends CI_Controller {
 				//ciclo para pagar interes de mora
 				$dias_mora=0;
 				//echo '<p>Abono No:'.$i.'por:'.$dinero.'</p>';
-				$c=1;
-
-
-
-				$capital_abonado=$capital_pagado;
-				
-				//distribuyo el capital abonado en las cuotas.
-				foreach ($cuotas as $cuota) {
-					
-					//echo '<p>' .$cuota['deuda_capital'].' '.$cuota['interes_mora_pagado'].'</p>';
-				}
-				//echo '</p>';
-
-
+				$c=0;
 
 				foreach ($cuotas as $cuota) {
-
-					//Distribuyo el capital abonado entre las diferentes cuotas con capital pactado.
-					if($capital_abonado>0){
-						if($cuota['deuda_capital']<$capital_abonado){
-							$capital_abonado-=$cuota['deuda_capital'];
-							$cuota['deuda_capital']=0;
-						}
-						else{
-							$cuota['deuda_capital']-=$capital_abonado;
-							$capital_abonado=0;
-						}
-					}
-					
-
 
 					$dias_mora=0;
 					$interes_mora=0;
 					$fecha_cuota=new DateTime($cuota['fechaCuota']);
 					$fecha_ult_mora= new DateTime($cuota['fecha_ult_abono_mora']);
-					
-
 					//Si hay dinero lo distribuyo en los interes de mora.
+					//echo  '<p>debe:'.$cuota['deuda_capital'].'</p>';
 					if($dinero>0){
 						if($credito->interes_mora>0) {
-							if($fecha_abono>$fecha_cuota&&$cuota['deuda_capital']>0){
+							if($fecha_abono>$fecha_cuota){
 								$intervalo=$fecha_ult_mora->diff($fecha_abono);
 								$dias_mora=$intervalo->format('%R%a');
 								$interes_mora=$cuota['deuda_capital']*(($credito->interes_mora/100)/30)*$dias_mora;
-								$interes_mora-=$cuota['interes_mora_pagado'];
-								$cuota['fecha_ult_abono_mora']=$fecha_cuota;
+								$interes_mora+=$cuota['interes_mora_deuda'];
+								$cuota['fecha_ult_abono_mora']=$fecha_abono->format('Y-m-d');
 								//$interes_mora+=$cuota['interes_mora_deuda'];
-								//echo ' <p>debe:'.$interes_mora.' de interes de mora capital cuota: '.$cuota['deuda_capital'].'</p>';
+								//echo  '<p>debe:'.$cuota['deuda_capital'].'</p>';
 								if($dinero>=$interes_mora){
-									$cuota['interes_mora_pagado']=$interes_mora;
+									$cuota['interes_mora_pagado']=0;
+									$cuota['interes_mora_deuda']=0;
 									$dinero-=$interes_mora;
+									$cuota['fecha_ult_abono_mora']=$fecha_abono->format('Y-m-d');
+									//echo $fecha_abono->format('Y-m-d');
 								}
 								else{
 									$cuota['interes_mora_pagado']+=$dinero;
 									$cuota['interes_mora_deuda']=$interes_mora-$dinero;
-									$cuota['fecha_ult_abono_mora']=$fecha_cuota;
+									$cuota['fecha_ult_abono_mora']=$fecha_abono->format('Y-m-d');
+
 									$interes_mora=$dinero;
 									$dinero=0;
 
@@ -162,22 +139,24 @@ class Abonos extends CI_Controller {
 							$interes_mora_abono+=$interes_mora;
 						}
 					}
-
+					
+					$cuotas[$c]=$cuota;
 
 					$c++;
 				}
-				
+				$interes_pagado_total+=$interes_mora_abono;
+				//echo $interes_pagado_total;
 				//si queda dinero, distribuyo en los intereses corrientes vencidos hasta la fecha.
-				
 				if($dinero>0&&$saldo>0&&$fecha_credito<$fecha_abono){
 					$intervalo_corriente=$ultimo_capital->diff($fecha_abono);
 					$meses_corriente=$intervalo_corriente->format('%m');
+					$años_corriente=$intervalo_corriente->format('%y');
+					$meses_corriente+=($años_corriente*12);
 					$dias_corriente=$intervalo_corriente->format('%d');
 					$corriente_en_meses=($corriente_pactado/100)*$saldo*$meses_corriente;
 					$corriente_en_dias=(($corriente_pactado/100)/30)*$saldo*$dias_corriente;
 					$corriente_total=$corriente_en_meses+$corriente_en_dias;
 					$interes_corriente_abono=$corriente_total-$interes_corriente_pagado;
-					
 					//si queda mas dinero que lo que debo de interes corriente, 
 					//le descuento estos intereses al dinero y el interes corriente queda pagado hasta la fecha del abono.
 					if($dinero>$interes_corriente_abono){
@@ -192,11 +171,12 @@ class Abonos extends CI_Controller {
 						$dinero=0;
 					}
 				}
-				
+
+
 				//si queda saldo, abono lo que quede a capital.
 				
 				if($saldo>0&&$dinero>0){
-					
+
 					if($dinero>$saldo){
 						$capital_abono=$dinero;
 						$ultimo_capital=$fecha_abono;
@@ -218,18 +198,39 @@ class Abonos extends CI_Controller {
 				else{
 					$devolucion+=$dinero;
 				}
+				$ncta=0;
+				//Distribuyo el capital abonado entre las diferentes cuotas con capital pactado.
+				$capital_abonado=$capital_pagado;
+				foreach ($cuotas as $cuota) {
+					if($capital_abonado>0){
+						if($cuota['capitalCuota']<$capital_abonado){
+							$capital_abonado-=$cuota['capitalCuota'];
+							$cuota['deuda_capital']=0;
+							$cuota['interes_mora_pagado']=0;
+						}
+						else{
+							$cuota['deuda_capital']=$cuota['capitalCuota']-$capital_abonado;
+							$capital_abonado=0;
+							$cuota['interes_mora_pagado']=0;
+
+						}
+					}
+					$cuotas[$ncta]=$cuota;
+					$ncta++;
+				}
 
 				$i++;
-				$intervalo_corriente=$ultimo_capital->diff($fecha_abono);
-				$meses_corriente=$intervalo_corriente->format('%m');
-				$dias_corriente=$intervalo_corriente->format('%d');
+				//$intervalo_corriente=$ultimo_capital->diff($fecha_abono);
+				//$meses_corriente=$intervalo_corriente->format('%m');
+				//$dias_corriente=$intervalo_corriente->format('%d');
+				//echo $meses_corriente.' ';
 				echo '<tr>
 	              <td>'.$abono->fecha.'</td>
-	              <td>'.$abono->valor.'</td>
-	              <td>'.$interes_mora_abono.'</td>
-	              <td>'.$interes_corriente_abono.'</td>
-	              <td>'.$capital_abono.'</td>
-	              <td>'.$saldo.'</td>
+	              <td>$ '.number_format($abono->valor, 0, ',', '.').'</td>
+	              <td>$ '.number_format($interes_mora_abono, 0, ',', '.').'</td>
+	              <td>$ '.number_format($interes_corriente_abono, 0, ',', '.').'</td>
+	              <td>$ '.number_format($capital_abono, 0, ',', '.').'</td>
+	              <td>$'.number_format($saldo, 0, ',', '.').'</td>
 	              <td><input type="button" id="elim_abono" class="btn btn-danger btn-small" value="Eliminar" onclick="eliminarAbono('.$banco.','.$credito->id_credito.','.$abono->id.')"></td>
 	           	</tr> ';
 			}
@@ -247,10 +248,12 @@ class Abonos extends CI_Controller {
 		if($fecha_actual>$ultimo_capital){
 			$intervalo_ultimo_cap=$ultimo_capital->diff($fecha_actual);
 			$meses_corriente=$intervalo_ultimo_cap->format('%m');
+			$años_corriente=$intervalo_ultimo_cap->format('%y');
+			$meses_corriente+=($años_corriente*12);
 			$dias_corriente=$intervalo_ultimo_cap->format('%d');
 			$saldo_corriente_en_meses=($corriente_pactado/100)*$saldo*$meses_corriente;
 			$saldo_corriente_en_dias=(($corriente_pactado/100)/30)*$saldo*$dias_corriente;
-			$saldo_corriente_total=($saldo_corriente_en_meses+$saldo_corriente_en_dias)-$interes_corriente_pagado;
+ 			$saldo_corriente_total=($saldo_corriente_en_meses+$saldo_corriente_en_dias)-$interes_corriente_pagado;
 		}
 		//echo 'Ultimo capital:'.$ultimo_capital->format('Y-m-d').' Fecha Actual:'. $fecha_act .' Cpagado:'.$interes_corriente_pagado;
 		$interes_mora_fecha=0;
@@ -260,24 +263,32 @@ class Abonos extends CI_Controller {
 			$interes_mora=0;
 			$fecha_cuota=new DateTime($cuota['fechaCuota']);
 			$fecha_ult_mora= new DateTime($cuota['fecha_ult_abono_mora']);
-
+			
 			if($credito->interes_mora>0) {
+				//echo '<p>'.$cuota['deuda_capital'].'</p>';
+				
+				//echo'<p>PAGADO '. $cuota['interes_mora_pagado'].'</p>';
 				if($fecha_actual>$fecha_cuota&&$cuota['deuda_capital']>0){
 					$intervalo=$fecha_ult_mora->diff($fecha_actual);
 					$dias_mora=$intervalo->format('%R%a');
 					$interes_mora=$cuota['deuda_capital']*(($credito->interes_mora/100)/30)*$dias_mora;
+					//echo'<p>MORA '. $interes_mora.'</p>';
+					//echo'<p>PAGADO '. $cuota['interes_mora_pagado'].'</p>';
 					$interes_mora-=$cuota['interes_mora_pagado'];
 				}
 				$interes_mora_fecha+=$interes_mora;
 			}
+			
+			
 		}
 		$total_fecha=0;
 		$total_fecha=$saldo+$saldo_corriente_total+$interes_mora_fecha;
-		echo '<legend>Saldo a la fecha</legend><div class="row">
-		<div class="span2"><span class="label label-success">Saldo Total: '.$total_fecha.'</span></div>
-		<div class="span3"><span class="label label-info">Interes Corriente: '.$saldo_corriente_total.'</span></div>';
-		echo '<div class="span3"><span class="label label-info">Interes Mora: '.$interes_mora_fecha.'</span></div>';
-		echo '<div class="span3"><span class="label label-info">Saldo Capital: '.$saldo.'</span></div></div><hr><br><br><legend>Abonos Realizados</legend><br>';
+		echo '<legend>Saldo a la fecha</legend><div>
+
+		<div class="saldo"><span class="titulo-saldo">Saldo Total:</span>$'.number_format($total_fecha, 0, ',', '.').'</div>
+		<div class="saldo"><span class="titulo-saldo">Interes Corriente:</span>$'.number_format($saldo_corriente_total, 0, ',', '.').'</div>';
+		echo '<div class="saldo"><span class="titulo-saldo">Interes Mora: </span>$'.number_format($interes_mora_fecha, 0, ',', '.').'</div>';
+		echo '<div class="saldo"><span class="titulo-saldo">Saldo Capital: </span>$'.number_format($saldo, 0, ',', '.').'</div></div><hr class="divisor"><br><legend>Abonos Realizados</legend><br>';
 		
 	}
 

@@ -151,7 +151,6 @@ class Banco extends CI_Controller {
 					<th>Identificación</th>	
 					<th>Nombre</th>
 					<th>Municipio</th>
-					<th>Vereda</th>
 					<th>Celular</th>
 					<th>Ocupación</th>
 					<th></th>
@@ -165,9 +164,8 @@ class Banco extends CI_Controller {
 			$clientes.='
 						<tr class="odd gradeX">	
 							<td><a onmouseover="highlightMarker('.$i.')">'.$fila->Identificacion.'</a></td>
-							<td>'.$fila->Nombre1.' '.$fila->Apellido1.'</td>
+							<td>'.$fila->Nombre1.' '.$fila->Nombre2.' '.$fila->Apellido1.'</td>
 							<td>'.$this->ubigeo->devolver_municipio($fila->Municipio).'</td>
-							<td>'.$fila->Vereda.'</td>	
 							<td>'.$fila->Celular.'</td>
 							<td>'.$fila->ocupacion.'</td>
 							<td><a class="btn btn-success  btn-mini" href="'.base_url().'personas/edit/'.$fila->Identificacion.'/'.$id_banco.'"><i class="icon-refresh icon-white"></i> Editar</a></td>					
@@ -181,7 +179,6 @@ class Banco extends CI_Controller {
 		 						<th></th>
 		 						<th></th>
 		 						<th></th>
-		                         <th></th>
 		                         <th></th>
 		                         <th></th>
 		                         <th></th>

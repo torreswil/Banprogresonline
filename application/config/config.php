@@ -57,7 +57,7 @@ $config['uri_protocol']	= 'AUTO';
 | http://codeigniter.com/user_guide/general/urls.html
 */
 
-$config['url_suffix'] = '';
+$config['url_suffix'] = 'html';
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'español';
 
 /*
 |--------------------------------------------------------------------------
