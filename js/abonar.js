@@ -40,9 +40,9 @@ function abonar(){
                     //$('#myModal').modal('hide');
                     distriAbonos();
                     //location.reload(true);
-                }
-            error:  alert('No se pudo realizar este abono');  
-    })
+                },
+            error:  alert('No se pudo realizar este abono')
+    });
 };
 
 function distriAbonos(){
