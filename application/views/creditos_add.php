@@ -4,16 +4,15 @@
 <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>Registrar Credito</title>
-      <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet">
+      
       <link href="<?php echo base_url()?>css/datepicker.css" rel="stylesheet">
       <link rel="stylesheet"  href="<?php echo base_url()?>css/bootstrap.css">
+      <link href="<?php echo base_url()?>css/banprogreso.css" rel="stylesheet">
       <script type="text/javascript" src="<?php echo base_url()?>js/jquery.js"></script>
       <script type="text/javascript" src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
       <script src="<?php echo base_url()?>js/amortizacion.js"></script>
       <style>
-      .container {
-            background: #fff;
-      }
+
       #alert {
             display: none;
       }
@@ -22,16 +21,19 @@
 </head>
 <body>
       <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-            <div class="container">
-                        <ul class="nav">
-                          <li>
-                            <a href="<?php echo base_url() ?>banco">Inicio</a>
-                          </li>
-                        </ul>
-                </div>
-            </div>
+      <div class="navbar-inner">
+        <div class="container">
+          <ul class="nav">
+            <li><a id='logo' href='<?php echo base_url() ?>banco'>
+            <img  width="150" src="<?php echo base_url() ?>images/Logotipo Banprogreso.png" />
+          </a></li>
+            <li>
+              <a href="<?php echo base_url() ?>banco">Inicio</a>
+            </li>
+          </ul>
+        </div>
       </div>
+    </div>
       <div class="container espacio">
               
             <div class="span12">
@@ -190,6 +192,13 @@
                   </div>
             </div>
       </div>
+      <div id="footer">
+    <center>
+      <p>Desarrollado por: <a href="https://twitter.com/Wiltoco">Wilfredo Torres  @wiltoco</a></p>
+    <img id="logo-footer" width="150" src="<?php echo base_url() ?>images/Logo Amanecer WEB 2.jpg" />
+    </center>
+  </div>
+            
       <script>
       $(function(){
             window.prettyPrint && prettyPrint();

@@ -66,6 +66,29 @@ table.datos-cliente{
   cursor: default;
   color: green;
 }
+#cartera{
+  font-size: 12px;
+}
+
+#footer-cartera{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#logo{
+  display: block;
+  padding: 0px 20px 0px 0px;
+}
+
+#footer{
+  background-color: white;
+  padding: 20px;
+}
+
+#logo-footer{
+    margin: 0 auto;
+
+}
 
 .oculto{
   display: none;

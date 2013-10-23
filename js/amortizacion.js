@@ -118,22 +118,28 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 		var capitalCuota = 0;//lo que se pagara en la cuota, este valor se pasa cuando se cree la cuota.
 		var fechaCuota = "";
 		var mes = 0;
-		
+		var numCuotas = 0;
+		var potencia = 0;
+		var cuotaFija = 0;
+		var mesesAdeudados = 0;
 		if(pInteres==pCapital){
-			var numCuotas=Math.ceil(plazo/pInteres);
-			var potencia=Math.pow((1+(interes/100)),numCuotas);
-			var cuotaFija= (monto*((interes*potencia)/(potencia-1)))/100;
+			numCuotas=Math.ceil(plazo/pInteres);
+			potencia=Math.pow((1+(interes*pInteres/100)),numCuotas);
+			cuotaFija= ((monto*((interes*potencia)/(potencia-1)))/100)*pInteres;
+
 			for(mes=1;mes<=plazo;mes++){
 				capitalCuota=0;
 				interesCuota=0;
+				mesesAdeudados++;
 				if(mes%pCapital==0 || mes==plazo){
 					fechaCuota=calcularFecha(fechaInicial,mes);
-					interesCuota=saldo*(interes/100)*pCapital;
+					interesCuota=saldo*(interes/100)*mesesAdeudados;
 					capitalCuota=cuotaFija-interesCuota;
 					saldo-=capitalCuota;
 					valorCuota=capitalCuota+interesCuota;
 					numCuota+=1;
 					cuotas[numCuota-1] = new Cuota(numCuota,fechaCuota,valorCuota,interesCuota,capitalCuota,saldo);
+					mesesAdeudados=0;
 				}
 			}
 		}	

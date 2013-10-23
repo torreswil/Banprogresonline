@@ -127,6 +127,9 @@ function toggleBounce() {
   		<div class="navbar-inner">
 	    	<div class="container">
 		      	<ul class="nav">
+		      		<li><a id='logo' href='<?php echo base_url() ?>banco' title='Fleetio homepage'>
+            <img  width="150" src="<?php echo base_url() ?>images/Logotipo Banprogreso.png" />
+          </a></li>
 				  <li>
 				    <a href="<?php echo base_url() ?>banco">Inicio</a>
 				  </li>
@@ -221,5 +224,6 @@ echo form_open(current_url()); ?>
 
 		</div>
 	</div>
+	
 </body>
 </html>

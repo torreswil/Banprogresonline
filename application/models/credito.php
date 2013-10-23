@@ -39,5 +39,13 @@ class Credito extends CI_Model {
 		return $result->transaccion;
 	}
 
+	function devolver_creditos($id_banco)
+	{
+		$this->db->where('banco',$id_banco);
+		$query=$this->db->get('vistacredito');
+		$result = $query->result();
+        return $result;
+	}
+
 }
 ?>

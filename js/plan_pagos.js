@@ -82,8 +82,8 @@ function Credito(monto,plazo,interes,pInteres,pCapital,fechaInicial){
 		var mes = 0;
 		if(pInteres==pCapital){
 			var numCuotas=Math.ceil(plazo/pInteres);
-			var potencia=Math.pow((1+(interes/100)),numCuotas);
-			var cuotaFija= (monto*((interes*potencia)/(potencia-1)))/100;
+			var potencia=Math.pow((1+(interes*pInteres/100)),numCuotas);
+			var cuotaFija= ((monto*((interes*potencia)/(potencia-1)))/100)*pInteres;
 			for(mes=1;mes<=plazo;mes++){
 				capitalCuota=0;
 				interesCuota=0;

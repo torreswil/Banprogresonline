@@ -53,6 +53,9 @@
         <div class="navbar-inner">
             <div class="container">
                 <ul class="nav">
+                  <li><a id='logo' href='/' title='Fleetio homepage'>
+            <img  width="150" src="<?php echo base_url() ?>images/Logotipo Banprogreso.png" />
+          </a></li>
                     <li>
                         <a href="<?php echo base_url() ?>banco">Inicio</a>
                   </li>
@@ -273,4 +276,6 @@
       </script>
                   </div>
             </div>
+
+            
 </body>

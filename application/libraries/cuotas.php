@@ -25,8 +25,8 @@ class Cuotas {
 		
 		if($pInteres==$pCapital){
 			$numCuotas=ceil($plazo/$pInteres);
-			$potencia=pow((1+($interes/100)),$numCuotas);
-			$cuotaFija= ($monto*(($interes*$potencia)/($potencia-1)))/100;
+			$potencia=pow((1+($interes*$pInteres/100)),$numCuotas);
+			$cuotaFija= (($monto*(($interes*$potencia)/($potencia-1)))/100)*$pInteres;
 			for($mes=1;$mes<=$plazo;$mes++){
 				$capitalCuota=0;
 				$interesCuota=0;

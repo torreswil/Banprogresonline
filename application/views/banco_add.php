@@ -109,6 +109,9 @@ function toggleBounce() {
   		<div class="navbar-inner">
 	    	<div class="container">
 		      	<ul class="nav">
+			      	<li><a id='logo' href='/' title='Fleetio homepage'>
+	            <img  width="150" src="<?php echo base_url() ?>images/Logotipo Banprogreso.png" />
+	          </a></li>
 				  <li>
 				    <a href="<?php echo base_url() ?>banco">Inicio</a>
 				  </li>
@@ -207,5 +210,11 @@ echo form_open(current_url()); ?>
 
 		</div>
 	</div>
+	<div id="footer">
+			<center>
+				<p>Desarrollado por: <a href="https://twitter.com/Wiltoco">Wilfredo Torres  @wiltoco</a></p>
+			<img id="logo-footer" width="150" src="<?php echo base_url() ?>images/Logo Amanecer WEB 2.jpg" />
+			</center>
+		</div>
 </body>
 </html>

@@ -31,6 +31,9 @@
     <div class="navbar-inner">
       <div class="container">
         <ul class="nav">
+          <li><a id='logo' href='<?php echo base_url() ?>banco'> 
+            <img  width="150" src="<?php echo base_url() ?>images/Logotipo Banprogreso.png" />
+          </a></li>
           <li>
             <a href="<?php echo base_url() ?>banco">Inicio</a>
           </li>
@@ -97,7 +100,7 @@
                                     <input  id="periodo_intereses" name="txtPInteres" value="<?php echo $credito->periodo_intereses?>">
                                     <input  id="periodo_capital" name="txtIdPCapital" value="<?php echo $credito->periodo_capital?>">
                                 </div>
-                              <p><span class="dato-credito">Credito No:</span><label class="eti-credito"><?php echo ' '. number_format($credito->id_credito,0,",",".") ?></label><span class="dato-credito">Int Corriente:</span><label class="eti-credito"><?php echo ' '. $credito->interes_corriente ?>%</label><span class="dato-credito">Mora:</span><label class="eti-credito"><?php echo ' '. $credito->interes_mora ?>%</label><p>
+                              <p><span class="dato-credito">Credito No:</span><label class="eti-credito"><?php echo ' '. number_format($credito->id_credito,0,",",".") ?></label><span class="dato-credito">Int Corriente:</span><label class="eti-credito"><?php echo ' '. $credito->interes_corriente ?>%</label><span class="dato-credito">Adicional x Mora:</span><label class="eti-credito"><?php echo ' '. $credito->interes_mora ?>%</label><p>
                               <p><span class="dato-credito">Monto Aprobado:</span><label  class="eti-credito">$<?php echo ' '. number_format($credito->monto,0,",",".") ?></label><p>
                               <p><span class="dato-credito">Fecha desembolso:</span><label  class="eti-credito"><?php echo ' '. $credito->fecha_desembolso ?></label><p>
                               <p><span class="dato-credito">Plazo:</span><label class="eti-credito"><?php echo ' '. $credito->plazo; echo ($credito->plazo) <=1 ? ' Mes' : ' Meses'  ?></label><p>                                          
@@ -108,7 +111,7 @@
 
                   </div>
               </div>
-            </div>
+          </div>
           <div class="row" >
                 <div class="span12">
                     <div class="well">
@@ -195,7 +198,7 @@
               <input type="button" id="abonar" class="btn btn-primary" disabled="disabled" value="Abonar">
             </div>
             
-          </div>          
+      </div>          
       <script>
               $(function(){
                 window.prettyPrint && prettyPrint();
@@ -204,6 +207,13 @@
 
               });
       </script>
+    <div id="footer">
+          <center>
+          <img id="logo-footer" width="150" src="<?php echo base_url() ?>images/Logo Amanecer WEB 2.jpg" />
+          <p class="small">Software desarrollado por: <a href="https://twitter.com/Wiltoco">@wiltoco</a></p>
+          </center>
+    </div>
+    
       
 
 </body>

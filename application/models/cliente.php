@@ -37,7 +37,7 @@ class Cliente extends CI_Model {
 			<td><a class="btn btn-success btn-mini" href="'.base_url().'creditos/ver/'.$fila['id_credito'].'/'.$id_persona.'/'.$id_banco.'">
 			<i class="icon-eye-open icon-white"></i> Detalles</a></td>
 
-			<td><input type="button" id="id="eliminar-credito"" class="btn btn-danger btn-mini" value="Eliminar" onclick="eliminarCredito('.$id_banco.','.$fila['id_credito'].','.$id_persona.')"></td></tr>';
+			<td><input type="button" id="eliminar-credito" class="btn btn-danger btn-mini" value="Eliminar" onclick="eliminarCredito('.$id_banco.','.$fila['id_credito'].','.$id_persona.')"></td></tr>';
 		}
 		return $cadena;
 	}

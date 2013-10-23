@@ -27,20 +27,21 @@ function abonar(){
 	var baseurl=$('#abonUrl').val();
 	var datos=$('#frmAbonar').serialize();
 	$.ajax({
-                        url: baseurl+"/abonos/abonar",
-                        type: "POST",
-                        data: datos,
-                        success:
-                            function(r)
-                            {
-                                //alert(r);
-                                $('input#soporte').val('');
-                                $('input#valor').val('');
-                                $('input#fecha_abono').val('');
-                                //$('#myModal').modal('hide');
-                                distriAbonos();
-                                //location.reload(true);
-                            }
+            url: baseurl+"/abonos/abonar",
+            type: "POST",
+            data: datos,
+            success:
+                function(r)
+                {
+                    //alert(r);
+                    $('input#soporte').val('');
+                    $('input#valor').val('');
+                    $('input#fecha_abono').val('');
+                    //$('#myModal').modal('hide');
+                    distriAbonos();
+                    //location.reload(true);
+                }
+            error:  alert('No se pudo realizar este abono');  
     })
 };
 

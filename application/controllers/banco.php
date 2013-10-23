@@ -164,7 +164,7 @@ class Banco extends CI_Controller {
 			$clientes.='
 						<tr class="odd gradeX">	
 							<td><a onmouseover="highlightMarker('.$i.')">'.$fila->Identificacion.'</a></td>
-							<td>'.$fila->Nombre1.' '.$fila->Nombre2.' '.$fila->Apellido1.'</td>
+							<td>'.$fila->Nombre1.' '.$fila->Apellido1.'</td>
 							<td>'.$this->ubigeo->devolver_municipio($fila->Municipio).'</td>
 							<td>'.$fila->Celular.'</td>
 							<td>'.$fila->ocupacion.'</td>
