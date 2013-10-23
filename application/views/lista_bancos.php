@@ -28,7 +28,7 @@
 		</style>
 		<link rel="stylesheet" href="<?php echo base_url()?>css/banprogreso.css">
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.js"></script>
-		<!--script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script-->
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo base_url()?>js/jquery.dataTables.js"></script>
       	<script type="text/javascript" src="<?php echo base_url()?>js/bootstrap-tab.js"></script>
 		<script type="text/javascript" charset="utf-8">
