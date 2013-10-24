@@ -190,7 +190,6 @@
                         <p class="help-inline"></p>
                   </div>
               </div>
-              <p id='pru'>prueba</p>
 
             </div>
             <div class="modal-footer">
